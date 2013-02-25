@@ -26,7 +26,7 @@ public class ResultMessage extends Message {
      * @param rawResults The ResultSet from the SELECT query.
      * @param id 
      */
-    public ResultMessage(ResultSet rawResults, int id) {
+    public ResultMessage(int id, ResultSet rawResults) {
         super(id);
         constructed = true;
         

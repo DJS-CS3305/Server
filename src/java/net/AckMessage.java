@@ -15,7 +15,7 @@ public class AckMessage extends Message {
      * @param value The boolean value of the message.
      * @param id The message's unique identification number.
      */
-    public AckMessage(boolean value, int id) {
+    public AckMessage(int id, boolean value) {
         super(id);
         content.put(VALUE, value);
     }

@@ -51,10 +51,20 @@ public class Authenticator {
             
             boolean valid = authenticate(username, passhash);
             
-            AckMessage ack = new AckMessage(valid, msg.getId());
+            AckMessage ack = new AckMessage(msg.getId(), valid);
+            ack.send(out);
             
             if(valid) {
-                //setup proper socket, send info to client
+                try {
+                    AdminServerSocket serverSocket = new AdminServerSocket(username);
+                    ConnectionMessage con = 
+                            new ConnectionMessage(msg.getId(), serverSocket.getPort());
+                    con.send(out);
+                }
+                catch(Exception e) {
+                    ErrorLogger.get().log(e.toString());
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -83,7 +93,7 @@ public class Authenticator {
             e.printStackTrace();
         }
         
-        return false;
+        return output;
     }
     
     /**

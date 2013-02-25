@@ -1,11 +1,9 @@
 package net;
 
-import java.util.HashMap;
-import java.net.ServerSocket;
-import java.net.Socket;
-import log.ErrorLogger;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 /**
  * Class for a net socket on the server that communicates with administrator
@@ -14,8 +12,6 @@ import java.io.ObjectOutputStream;
  * @author Stephen Fahy
  */
 public class AdminServerSocket {
-    private static final HashMap<String, AdminServerSocket> SOCKETS = 
-            new HashMap<String, AdminServerSocket>();
     private static final int START_PORT = 580;
     private static final int MAX_PORTS = 1000;
     private static int PORTS_USED = 0;
@@ -42,21 +38,13 @@ public class AdminServerSocket {
             Socket s = socket.accept();
             in = new ObjectInputStream(s.getInputStream());
             out = new ObjectOutputStream(s.getOutputStream());
-            
-            SOCKETS.put(username, this);
         }
         else {
             throw new Exception();
         }
     }
     
-    /**
-     * @param username A username.
-     * @return The socket associated with the user; null if none found.
-     */
-    public static AdminServerSocket getSocket(String username) {
-        return SOCKETS.get(username);
-    }
+    //getters
     public ObjectInputStream getIn() {
         return in;
     }

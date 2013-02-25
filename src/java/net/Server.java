@@ -1,42 +1,26 @@
 package net;
 
+import java.util.HashMap;
+
 /**
- * Class for managing requests from administrator clients. This class does not
- * set up the connections though, it accepts them from the Authenticator.
+ * Contains the methods for handling requests from connected administrator
+ * clients.
  * 
  * @author Stephen Fahy
  */
 public class Server {
-    //group of connections.
-    //list of possible & used port numbers.
+    private static Server INSTANCE = new Server();
     
-    /**
-     * @return An unused port number.
-     */
-    private static int getFreePort() {
-        return 0;
+    private Authenticator auth;
+    private HashMap<String, AdminServerSocket> sockets = 
+            new HashMap<String, AdminServerSocket>();
+    
+    private Server() {
+        auth = new Authenticator();
     }
     
-    /**
-     * Handles an incoming message.
-     */
-    private static void handleRequest() {
-        
-    }
-    
-    /**
-     * Adds a connection to the server's handled connections.
-     */
-    private static void addConnection() {
-        
-    }
-    
-    /**
-     * Checks if a connection is still alive.
-     * 
-     * @return True if the client is still connected.
-     */
-    private static boolean checkLife() {
-        return false;
+    //getters
+    public static Server get() {
+        return INSTANCE;
     }
 }

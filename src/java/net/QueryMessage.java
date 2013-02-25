@@ -16,7 +16,7 @@ public class QueryMessage extends Message {
      * @param query SQL query.
      * @param id 
      */
-    public QueryMessage(String query, int id) {
+    public QueryMessage(int id, String query) {
         super(id);
         content.put(QUERY, query);
     }
