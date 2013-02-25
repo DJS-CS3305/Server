@@ -19,6 +19,8 @@ public class Server {
         auth = new Authenticator();
     }
     
+    
+    
     //getters
     public static Server get() {
         return INSTANCE;

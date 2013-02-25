@@ -4,6 +4,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import log.ErrorLogger;
 
 /**
  * Class for a net socket on the server that communicates with administrator
@@ -42,6 +43,28 @@ public class AdminServerSocket {
         else {
             throw new Exception();
         }
+    }
+    
+    /**
+     * Checks for a message.
+     * @return A message in the buffer, or null if none found.
+     */
+    public Message checkForMessage() {
+        Message output = null;
+        
+        try {
+            Object obj = in.readObject();
+            
+            if(obj instanceof Message) {
+                output = (Message) obj;
+            }
+        }
+        catch(Exception e) {
+            ErrorLogger.get().log(e.toString());
+            e.printStackTrace();
+        }
+        
+        return output;
     }
     
     //getters
