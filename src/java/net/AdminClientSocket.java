@@ -1,21 +1,21 @@
 package net;
 
+import java.net.Socket;
+
 /**
- * Class for a net socket from an administrator client. On top of normal
- * client socket functionality, this includes information on the user's
- * username and access level.
+ * Class for a net socket from an administrator client.
  * 
  * @author Stephen Fahy
  */
 public class AdminClientSocket {
-    private String username;
-    //access level
+    private Socket socket;
     
-    //constructor w/username & access level & regular socket stuff
-    
-    //getters & setters
-    public String getUsername() {
-        return username;
+    public AdminClientSocket(int port, String ip) {
+        try {
+            socket = new Socket();
+        }
+        catch(Exception e) {
+            
+        }
     }
-    //get access level
 }

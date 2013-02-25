@@ -18,8 +18,17 @@ import log.ErrorLogger;
 public class ResultMessage extends Message {
     public static final String RESULTS = "results";
     
-    public ResultMessage(String destination, ResultSet rawResults, int id) {
-        super(destination, id);
+    private boolean constructed;
+    
+    /**
+     * Constructor.
+     * 
+     * @param rawResults The ResultSet from the SELECT query.
+     * @param id 
+     */
+    public ResultMessage(ResultSet rawResults, int id) {
+        super(id);
+        constructed = true;
         
         LinkedList<HashMap<String, String>> results = 
                 new LinkedList<HashMap<String, String>>();
@@ -51,9 +60,12 @@ public class ResultMessage extends Message {
             ErrorLogger.get().log(e.toString());
             e.printStackTrace();
             
-            //send failure message to receiver
-            AckMessage msg = new AckMessage(destination, false, id);
-            msg.send();
+            constructed = false;
         }
+    }
+    
+    //getters
+    public boolean isConstructed() {
+        return constructed;
     }
 }

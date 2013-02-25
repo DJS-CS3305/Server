@@ -13,11 +13,10 @@ public class AckMessage extends Message {
      * Constructor.
      * 
      * @param value The boolean value of the message.
-     * @param destination The receiver's IP address as a String.
      * @param id The message's unique identification number.
      */
-    public AckMessage(String destination, boolean value, int id) {
-        super(destination, id);
+    public AckMessage(boolean value, int id) {
+        super(id);
         content.put(VALUE, value);
     }
 }
