@@ -1,7 +1,8 @@
 package net;
 
 /**
- * Message for sending positive or negative replies. (ie: like ACK and NACK)
+ * Message for sending positive or negative replies (ie: like ACK and NACK).
+ * The contents are a single boolean value.
  * 
  * @author Stephen Fahy
  */

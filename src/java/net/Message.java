@@ -1,5 +1,6 @@
 package net;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 /**
@@ -10,7 +11,7 @@ import java.util.HashMap;
  * 
  * @author Stephen Fahy
  */
-public abstract class Message {
+public abstract class Message implements Serializable {
     private String destination;
     protected HashMap<String, Object> content;
     private int id;
@@ -31,7 +32,7 @@ public abstract class Message {
      * Sends the message.
      */
     public void send() {
-        
+        //TODO code sending the message.
     }
     
     //getters
