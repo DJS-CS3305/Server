@@ -5,6 +5,7 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.ResultSet;
+import log.AccessLogger;
 import log.ErrorLogger;
 import sql.Query;
 
@@ -42,6 +43,7 @@ public class Authenticator {
     
     /**
      * Handles a request from a client wishing to connect to the server.
+     * All other messages on this port will be ignored.
      */
     public void handleRequest(Message msg) {
         if(msg instanceof AuthMessage) {
@@ -57,9 +59,12 @@ public class Authenticator {
             if(valid) {
                 try {
                     AdminServerSocket serverSocket = new AdminServerSocket(username);
+                    Server.get().addSocket(serverSocket);
                     ConnectionMessage con = 
                             new ConnectionMessage(msg.getId(), serverSocket.getPort());
                     con.send(out);
+                    
+                    AccessLogger.get().log(username + " connected.");
                 }
                 catch(Exception e) {
                     ErrorLogger.get().log(e.toString());
@@ -76,7 +81,7 @@ public class Authenticator {
      * @param passhash The hash of the user's password.
      * @return True if the given username/password hash combo are on the DB as admin.
      */
-    public boolean authenticate(String username, String passhash) {
+    private boolean authenticate(String username, String passhash) {
         boolean output = false;
         
         ResultSet results = Query.query("SELECT * FROM Users WHERE admin = TRUE " +

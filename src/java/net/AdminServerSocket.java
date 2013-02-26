@@ -67,6 +67,19 @@ public class AdminServerSocket {
         return output;
     }
     
+    /**
+     * Closes the socket.
+     */
+    public void close() {
+        try {
+            socket.close();
+        }
+        catch(Exception e) {
+            ErrorLogger.get().log(e.toString());
+            e.printStackTrace();
+        }
+    }
+    
     //getters
     public ObjectInputStream getIn() {
         return in;

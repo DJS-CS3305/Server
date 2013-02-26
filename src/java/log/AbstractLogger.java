@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 import java.util.logging.StreamHandler;
+import java.util.Date;
 
 /**
  * Abstract class for logging system information. The class takes in logs and
@@ -46,7 +47,7 @@ public abstract class AbstractLogger extends Thread {
      * @param message 
      */
     public void log(String message) {
-        logger.log(severity, message);
+        logger.log(severity, (new Date() + message));
         handler.flush();
     }
 }
