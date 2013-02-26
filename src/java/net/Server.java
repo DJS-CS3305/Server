@@ -20,6 +20,8 @@ public class Server {
     private HashMap<String, AdminServerSocket> sockets;
     //integers represent checks to sockets without any activity
     private HashMap<String, Integer> activity;
+    private Checker checker;
+    private boolean running;
     
     /**
      * Constructor.
@@ -28,6 +30,8 @@ public class Server {
         auth = new Authenticator();
         sockets = new HashMap<String, AdminServerSocket>();
         activity = new HashMap<String, Integer>();
+        running = true;
+        checker = new Checker();
     }
     
     /**
@@ -111,8 +115,52 @@ public class Server {
         }
     }
     
+    /**
+     * Turns the server on.
+     */
+    public void on() {
+        running = true;
+        checker.loop();
+    }
+    
+    /**
+     * Turns the server off.
+     */
+    public void off() {
+        running = false;
+    }
+    
     //getters
     public static Server get() {
         return INSTANCE;
+    }
+    public boolean isRunning() {
+        return running;
+    }
+    
+    /**
+    * Checks the server for activity in a loop as long as it is on. Needs
+    * to be informed of the server being turned on or off.
+    * 
+    * @author Stephen Fahy
+    */
+    private class Checker extends Thread {
+        /**
+         * Constructor.
+         */
+        private Checker() {
+            loop();
+        }
+        
+        /**
+         * Loops as long as the server runs, checking for messages.
+         * Must be called when the server starts.
+         */
+        private void loop() {
+            while(isRunning()) {
+                checkAuth();
+                checkClients();
+            }
+        }
     }
 }
