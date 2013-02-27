@@ -15,11 +15,11 @@ public class AuthMessage extends Message {
      * 
      * @param id
      * @param username The username the user wishes to log in with.
-     * @param password The password associated with the username. Stores as hash.
+     * @param passhash The password associated with the username.
      */
-    public AuthMessage(int id, String username, String password) {
+    public AuthMessage(int id, String username, String passhash) {
         super(id);
         content.put(USERNAME, username);
-        content.put(PASSWORD, password.hashCode());
+        content.put(PASSWORD, passhash);
     }
 }

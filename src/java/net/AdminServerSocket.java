@@ -12,7 +12,7 @@ import log.ErrorLogger;
  * 
  * @author Stephen Fahy
  */
-public class AdminServerSocket {
+public class AdminServerSocket extends Thread implements Runnable {
     private static final int START_PORT = 580;
     private static final int MAX_PORTS = 1000;
     private static int PORTS_USED = 0;
@@ -32,13 +32,10 @@ public class AdminServerSocket {
     public AdminServerSocket(String username) throws Exception {
         if(PORTS_USED < MAX_PORTS) {
             this.username = username;
-            int port = START_PORT + PORTS_USED;
+            int port = getNextFreePort();
             PORTS_USED++;
             
             socket = new ServerSocket(port);
-            Socket s = socket.accept();
-            in = new ObjectInputStream(s.getInputStream());
-            out = new ObjectOutputStream(s.getOutputStream());
         }
         else {
             throw new Exception();
@@ -49,7 +46,7 @@ public class AdminServerSocket {
      * Checks for a message.
      * @return A message in the buffer, or null if none found.
      */
-    public Message checkForMessage() {
+    private Message checkForMessage() {
         Message output = null;
         
         try {
@@ -78,6 +75,39 @@ public class AdminServerSocket {
             ErrorLogger.get().log(e.toString());
             e.printStackTrace();
         }
+    }
+    
+    /**
+     * Runs forever, checking for messages.
+     */
+    @Override
+    public void run() {
+        try {
+            Socket s = socket.accept();
+            out = new ObjectOutputStream(s.getOutputStream());
+            out.flush();
+            in = new ObjectInputStream(s.getInputStream());
+
+            while(true) {
+                Message msg = checkForMessage();
+
+                if(msg != null) {
+                    Server.get().handleMessage(msg, username);
+                }
+            }
+        }
+        catch(Exception e) {
+            ErrorLogger.get().log(e.toString());
+            e.printStackTrace();
+        }
+    }
+    
+    /**
+     * @return The next free port number.
+     */
+    public static int getNextFreePort() {
+        int port = START_PORT + PORTS_USED;
+        return port;
     }
     
     //getters

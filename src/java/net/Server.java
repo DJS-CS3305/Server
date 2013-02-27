@@ -1,37 +1,49 @@
 package net;
 
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.sql.ResultSet;
 import java.util.HashMap;
-import java.util.Iterator;
 import log.AccessLogger;
+import log.ErrorLogger;
 import sql.Query;
 
 /**
  * Contains the methods for handling requests from connected administrator
- * clients.
+ * clients. Server will be off by default.
  * 
  * @author Stephen Fahy
  */
-public class Server {
+public class Server extends Thread {
     private static Server INSTANCE = new Server();
-    //amount of checks on a socket without activity for it to be closed
-    private static final int MAX_IDLE_TIME = 50000;
+    public static final int AUTH_PORT = 579;
     
-    private Authenticator auth;
+    private ServerSocket authPort;
     private HashMap<String, AdminServerSocket> sockets;
     //integers represent checks to sockets without any activity
     private HashMap<String, Integer> activity;
-    private Checker checker;
-    private boolean running;
+    private Authenticator auth;
     
     /**
      * Constructor.
      */
     private Server() {
-        auth = new Authenticator();
-        sockets = new HashMap<String, AdminServerSocket>();
-        activity = new HashMap<String, Integer>();
-        running = true;
-        checker = new Checker();
+        System.out.println("Starting server.");
+        try {
+            authPort = new ServerSocket(AUTH_PORT, 0, InetAddress.getLocalHost());
+            System.out.println(authPort.getInetAddress().getHostAddress());
+            sockets = new HashMap<String, AdminServerSocket>();
+            activity = new HashMap<String, Integer>();
+            auth = new Authenticator();
+        }
+        catch(Exception e) {
+            ErrorLogger.get().log(e.toString());
+            e.printStackTrace();
+            System.exit(1);
+        }
     }
     
     /**
@@ -45,53 +57,12 @@ public class Server {
     }
     
     /**
-     * Checks the authenticator for any incoming connection messages.
-     */
-    public void checkAuth() {
-        Message msg = auth.checkForRequest();
-        
-        if(msg != null) {
-            auth.handleRequest(msg);
-        }
-    }
-    
-    /**
-     * Checks all client sockets for messages.
-     */
-    public void checkClients() {
-        Iterator<String> iter = sockets.keySet().iterator();
-        
-        while(iter.hasNext()) {
-            String username = iter.next();
-            AdminServerSocket socket = sockets.get(username);
-            Message msg = socket.checkForMessage();
-            
-            if(msg != null) {
-                handleMessage(msg, username);
-                activity.put(username, 0);
-            }
-            else {
-                activity.put(username, activity.get(username) + 1);
-                
-                //close connection & remove socket if idle too long.
-                if(activity.get(username) == MAX_IDLE_TIME) {
-                    socket.close();
-                    sockets.remove(username);
-                    activity.remove(username);
-                    
-                    AccessLogger.get().log(username + " disconnected due to timeout.");
-                }
-            }
-        }
-    }
-    
-    /**
      * Handles a message.
      * 
      * @param msg A message from a user.
      * @param username That user's username.
      */
-    private void handleMessage(Message msg, String username) {
+    public void handleMessage(Message msg, String username) {
         if(msg instanceof QueryMessage) {
             //SQL query handling
             QueryMessage qmsg = (QueryMessage) msg;
@@ -115,52 +86,106 @@ public class Server {
         }
     }
     
-    /**
-     * Turns the server on.
-     */
-    public void on() {
-        running = true;
-        checker.loop();
-    }
-    
-    /**
-     * Turns the server off.
-     */
-    public void off() {
-        running = false;
-    }
-    
     //getters
     public static Server get() {
         return INSTANCE;
     }
-    public boolean isRunning() {
-        return running;
-    }
     
     /**
-    * Checks the server for activity in a loop as long as it is on. Needs
-    * to be informed of the server being turned on or off.
+    * Checks the authorization port for activity in a loop.
     * 
     * @author Stephen Fahy
     */
-    private class Checker extends Thread {
+    private class Authenticator extends Thread {
         /**
          * Constructor.
          */
-        private Checker() {
+        private Authenticator() {
             loop();
         }
         
         /**
-         * Loops as long as the server runs, checking for messages.
-         * Must be called when the server starts.
+         * Loops as long as the server runs, checking for messages/connections.
+         * Must be called when the server is turned on.
          */
         private void loop() {
-            while(isRunning()) {
-                checkAuth();
-                checkClients();
+            while(true) {
+                try {
+                    handleAuthRequest(authPort.accept());
+                }
+                catch(Exception e) {
+                    ErrorLogger.get().log(e.toString());
+                    e.printStackTrace();
+                }
             }
         }
+       
+       /**
+        * Handles a request from a client wishing to connect to the server.
+        * All other messages on this port will be ignored.
+        */
+       private void handleAuthRequest(Socket client) throws Exception {
+           ObjectOutputStream out = new ObjectOutputStream(client.getOutputStream());
+           ObjectInputStream in = new ObjectInputStream(client.getInputStream());
+           
+           Message msg = (Message) in.readObject();
+           
+           if(msg instanceof AuthMessage) {
+               AuthMessage authMsg = (AuthMessage) msg;
+               String username = authMsg.getContent().get(AuthMessage.USERNAME).toString();
+               String passhash = authMsg.getContent().get(AuthMessage.PASSWORD).toString();
+               
+               boolean valid = authenticate(username, passhash);
+
+               if(valid) {
+                   ConnectionMessage con = new ConnectionMessage(msg.getId(), 
+                           AdminServerSocket.getNextFreePort());
+                   con.send(out);
+                   out.flush();
+                   
+                   AdminServerSocket serverSocket = new AdminServerSocket(username);
+                   addSocket(serverSocket);
+                   
+                   AccessLogger.get().log(username + " connected.");
+               }
+               else {
+                   //invalid login details
+                   AckMessage ack = new AckMessage(msg.getId(), false);
+                   ack.send(out);
+               }
+           }
+       }
+       
+       /**
+        * Authenticates a user wishing to connect to the system.
+        * 
+        * @param username The user's username.
+        * @param passhash The hash of the user's password.
+        * @return True if the given username/password hash combo are on the DB as admin.
+        */
+       private boolean authenticate(String username, String passhash) {
+           boolean output = false;
+           System.out.println("Username: " + username);
+           System.out.println("Passhash: " + passhash);
+
+           ResultSet results = Query.query("SELECT * FROM Users WHERE isAdmin = TRUE " +
+                   "AND username = '" + username + "' " +
+                   "AND password = '" + passhash + "';");
+
+           try {
+               results.last();
+               int resultSize = results.getRow();
+               System.out.println("Result Size: " + resultSize);
+               if(resultSize == 1) {
+                   output = true;
+               }
+           }
+           catch(Exception e) {
+               ErrorLogger.get().log(e.toString());
+               e.printStackTrace();
+           }
+
+           return output;
+       }
     }
 }

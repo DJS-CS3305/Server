@@ -1,8 +1,8 @@
 package net;
 
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.HashMap;
-import java.io.ObjectOutputStream;
 import log.ErrorLogger;
 
 /**
