@@ -53,10 +53,8 @@ public class Authenticator {
             
             boolean valid = authenticate(username, passhash);
             
-            AckMessage ack = new AckMessage(msg.getId(), valid);
-            ack.send(out);
-            
             if(valid) {
+                //valid login details
                 try {
                     AdminServerSocket serverSocket = new AdminServerSocket(username);
                     Server.get().addSocket(serverSocket);
@@ -70,6 +68,11 @@ public class Authenticator {
                     ErrorLogger.get().log(e.toString());
                     e.printStackTrace();
                 }
+            }
+            else {
+                //invalid login details
+                AckMessage ack = new AckMessage(msg.getId(), false);
+                ack.send(out);
             }
         }
     }
