@@ -47,7 +47,7 @@ public abstract class AbstractLogger extends Thread {
      * @param message 
      */
     public void log(String message) {
-        logger.log(severity, (new Date() + message));
+        logger.log(severity, ("\n\t" + new Date() + " - " + message));
         handler.flush();
     }
 }

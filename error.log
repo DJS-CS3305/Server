@@ -10,3 +10,7 @@ Feb 27, 2013 4:19:48 PM log.AbstractLogger log
 SEVERE: Wed Feb 27 16:19:48 GMT 2013com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'admin' in 'where clause' Query [SELECT * FROM Users WHERE admin = TRUE AND username = 'test' AND password = '1982635884';] has failed.
 Feb 27, 2013 4:19:48 PM log.AbstractLogger log
 SEVERE: Wed Feb 27 16:19:48 GMT 2013java.lang.NullPointerException
+04-Mar-2013 11:24:15 log.AbstractLogger log
+SEVERE: Mon Mar 04 11:24:15 GMT 2013javax.mail.MessagingException: Could not connect to SMTP host: smtp.gmail.com, port: 465;
+  nested exception is:
+	java.net.ConnectException: Connection timed out: connect
