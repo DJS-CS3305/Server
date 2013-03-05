@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.util.HashMap;
 import log.AccessLogger;
 import log.ErrorLogger;
+import mail.Mailer;
 import sql.Query;
 
 /**
@@ -67,11 +68,55 @@ public class Server extends Thread {
             //SQL query handling
             QueryMessage qmsg = (QueryMessage) msg;
             String query = (String) qmsg.getContent().get(QueryMessage.QUERY);
-            ResultMessage reply = new ResultMessage(qmsg.getId(), Query.query(query));
-            reply.send(sockets.get(username).getOut());
+            ResultSet results = Query.query(query);
+            ResultMessage reply;
+            
+            try {
+                results.last();
+                if(results.getRow() == 0) {
+                    reply = new ResultMessage(qmsg.getId(), null);
+                }
+                else {
+                    results.beforeFirst();
+                    reply = new ResultMessage(qmsg.getId(), results);
+                }
+                reply.send(sockets.get(username).getOut());
+            }
+            catch(Exception e) {
+                ErrorLogger.get().log(e.toString());
+                e.printStackTrace();
+                reply = new ResultMessage(qmsg.getId(), null);
+                reply.send(sockets.get(username).getOut());
+            }
             
             AccessLogger.get().log(username + " sent SQL query " + 
                     query + ".");
+            
+            //send emails if the sql statement was an update on courses
+            String action = query.split(" ")[0];
+            String table = query.split(" ")[1];
+            
+            if(action.toLowerCase().equals("update") &&
+                    table.toLowerCase().equals("courses")) {
+                String code = query.split("code = '")[1].split("';")[0];
+                String emailQuery = "SELECT email FROM MailingList WHERE code = '" +
+                        code + "';";
+                ResultSet emailResults = Query.query(emailQuery);
+                
+                try {
+                    while(emailResults.next()) {
+                        String emailAddr = emailResults.getString(1);
+                        Mailer.mail(emailAddr, "Changes to course " + code,
+                                "There have been changes made to the course you are " +
+                                "registered for. Please check the website for further " +
+                                "details at your earliest convenience.");
+                    }
+                }
+                catch(Exception e) {
+                    ErrorLogger.get().log(e.toString());
+                    e.printStackTrace();
+                }
+            }
         }
         else if(msg instanceof AckMessage) {
             //receiving acknowledgements
