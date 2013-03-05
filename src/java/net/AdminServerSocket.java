@@ -12,7 +12,7 @@ import log.ErrorLogger;
  * 
  * @author Stephen Fahy
  */
-public class AdminServerSocket extends Thread implements Runnable {
+public class AdminServerSocket implements Runnable {
     private static final int START_PORT = 580;
     private static final int MAX_PORTS = 1000;
     private static int PORTS_USED = 0;
@@ -82,17 +82,31 @@ public class AdminServerSocket extends Thread implements Runnable {
      */
     @Override
     public void run() {
+        checkForMessages();
+    }
+    
+    /**
+     * Checks for incoming messages after initializing out and in streams.
+     */
+    private void checkForMessages() {
         try {
+            System.out.println("Server socket starting run...");
             Socket s = socket.accept();
+            System.out.println("Server socket initializing out...");
             out = new ObjectOutputStream(s.getOutputStream());
             out.flush();
+            System.out.println("Server socket initializing in...");
             in = new ObjectInputStream(s.getInputStream());
 
             while(true) {
                 Message msg = checkForMessage();
 
                 if(msg != null) {
+                    System.out.println("Message found in server socket.");
+                    System.out.println(msg);
+                    System.out.println(username);
                     Server.get().handleMessage(msg, username);
+                    System.out.println("Message handled.");
                 }
             }
         }

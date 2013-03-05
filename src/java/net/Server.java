@@ -32,13 +32,13 @@ public class Server extends Thread {
      * Constructor.
      */
     private Server() {
-        System.out.println("Starting server.");
         try {
             authPort = new ServerSocket(AUTH_PORT, 0, InetAddress.getLocalHost());
             System.out.println(authPort.getInetAddress().getHostAddress());
             sockets = new HashMap<String, AdminServerSocket>();
             activity = new HashMap<String, Integer>();
             auth = new Authenticator();
+            new Thread(auth).start();
         }
         catch(Exception e) {
             ErrorLogger.get().log(e.toString());
@@ -64,6 +64,8 @@ public class Server extends Thread {
      * @param username That user's username.
      */
     public void handleMessage(Message msg, String username) {
+        System.out.println("Message entered handleMessage()");
+        
         if(msg instanceof QueryMessage) {
             //SQL query handling
             QueryMessage qmsg = (QueryMessage) msg;
@@ -141,19 +143,19 @@ public class Server extends Thread {
     * 
     * @author Stephen Fahy
     */
-    private class Authenticator extends Thread {
+    private class Authenticator implements Runnable {
         /**
          * Constructor.
          */
         private Authenticator() {
-            loop();
         }
         
         /**
          * Loops as long as the server runs, checking for messages/connections.
          * Must be called when the server is turned on.
          */
-        private void loop() {
+        @Override
+        public void run() {
             while(true) {
                 try {
                     handleAuthRequest(authPort.accept());
@@ -190,6 +192,7 @@ public class Server extends Thread {
                    
                    AdminServerSocket serverSocket = new AdminServerSocket(username);
                    addSocket(serverSocket);
+                   new Thread(serverSocket).start();
                    
                    AccessLogger.get().log(username + " connected.");
                }
