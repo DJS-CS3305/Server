@@ -4,6 +4,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import log.ErrorLogger;
 
 /**
@@ -17,10 +18,12 @@ public class AdminServerSocket implements Runnable {
     private static final int MAX_PORTS = 1000;
     private static int PORTS_USED = 0;
     
-    private ServerSocket socket;
-    private ObjectInputStream in;
-    private ObjectOutputStream out;
+    private ServerSocket serverSocket;
+    private Socket clientSocket;
     private String username;
+    private boolean run;
+    private ObjectOutputStream out;
+    private ObjectInputStream in;
     
     /**
      * Constructor. Throws an exception if all available ports in the range
@@ -35,7 +38,10 @@ public class AdminServerSocket implements Runnable {
             int port = getNextFreePort();
             PORTS_USED++;
             
-            socket = new ServerSocket(port);
+            serverSocket = new ServerSocket(port);
+            clientSocket = serverSocket.accept();
+            
+            run = true;
         }
         else {
             throw new Exception();
@@ -46,19 +52,13 @@ public class AdminServerSocket implements Runnable {
      * Checks for a message.
      * @return A message in the buffer, or null if none found.
      */
-    private Message checkForMessage() {
+    private Message checkForMessage() throws SocketException, Exception {
         Message output = null;
         
-        try {
-            Object obj = in.readObject();
+        Object obj = in.readObject();
             
-            if(obj instanceof Message) {
-                output = (Message) obj;
-            }
-        }
-        catch(Exception e) {
-            ErrorLogger.get().log(e.toString());
-            e.printStackTrace();
+        if(obj instanceof Message) {
+            output = (Message) obj;
         }
         
         return output;
@@ -69,7 +69,7 @@ public class AdminServerSocket implements Runnable {
      */
     public void close() {
         try {
-            socket.close();
+            serverSocket.close();
         }
         catch(Exception e) {
             ErrorLogger.get().log(e.toString());
@@ -82,33 +82,32 @@ public class AdminServerSocket implements Runnable {
      */
     @Override
     public void run() {
-        checkForMessages();
+        check();
     }
     
     /**
-     * Checks for incoming messages after initializing out and in streams.
+     * Checks for incoming messages. Stops if there is a SocketException.
      */
-    private void checkForMessages() {
+    private void check() {
         try {
-            System.out.println("Server socket starting run...");
-            Socket s = socket.accept();
-            System.out.println("Server socket initializing out...");
-            out = new ObjectOutputStream(s.getOutputStream());
+            out = new ObjectOutputStream(clientSocket.getOutputStream());
             out.flush();
-            System.out.println("Server socket initializing in...");
-            in = new ObjectInputStream(s.getInputStream());
+            in = new ObjectInputStream(clientSocket.getInputStream());
 
-            while(true) {
+            while(run) {
                 Message msg = checkForMessage();
 
                 if(msg != null) {
-                    System.out.println("Message found in server socket.");
-                    System.out.println(msg);
-                    System.out.println(username);
                     Server.get().handleMessage(msg, username);
-                    System.out.println("Message handled.");
                 }
             }
+        }
+        catch(SocketException se) {
+            //connection lost, disconnect.
+            ErrorLogger.get().log(se.toString());
+            se.printStackTrace();
+            run = false;
+            close();
         }
         catch(Exception e) {
             ErrorLogger.get().log(e.toString());
@@ -134,10 +133,7 @@ public class AdminServerSocket implements Runnable {
     public String getUsername() {
         return username;
     }
-    public ServerSocket getSocket() {
-        return socket;
-    }
     public int getPort() {
-        return socket.getLocalPort();
+        return serverSocket.getLocalPort();
     }
 }

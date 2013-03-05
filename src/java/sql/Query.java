@@ -25,7 +25,13 @@ public class Query {
         
         try {
             Statement st = con.createStatement();
-            output = st.executeQuery(query);
+            
+            if(query.startsWith("SELECT")) {
+                output = st.executeQuery(query);
+            }
+            else {
+                st.executeUpdate(query);
+            }
         }
         catch(Exception e) {
             e.printStackTrace();

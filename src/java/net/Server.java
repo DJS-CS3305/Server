@@ -64,31 +64,32 @@ public class Server extends Thread {
      * @param username That user's username.
      */
     public void handleMessage(Message msg, String username) {
-        System.out.println("Message entered handleMessage()");
-        
         if(msg instanceof QueryMessage) {
             //SQL query handling
             QueryMessage qmsg = (QueryMessage) msg;
             String query = (String) qmsg.getContent().get(QueryMessage.QUERY);
             ResultSet results = Query.query(query);
-            ResultMessage reply;
             
-            try {
-                results.last();
-                if(results.getRow() == 0) {
+            if(results != null) {
+                ResultMessage reply;
+                
+                try {
+                    results.last();
+                    if(results.getRow() == 0) {
+                        reply = new ResultMessage(qmsg.getId(), null);
+                    }
+                    else {
+                        results.beforeFirst();
+                        reply = new ResultMessage(qmsg.getId(), results);
+                    }
+                    reply.send(sockets.get(username).getOut());
+                }
+                catch(Exception e) {
+                    ErrorLogger.get().log(e.toString());
+                    e.printStackTrace();
                     reply = new ResultMessage(qmsg.getId(), null);
+                    reply.send(sockets.get(username).getOut());
                 }
-                else {
-                    results.beforeFirst();
-                    reply = new ResultMessage(qmsg.getId(), results);
-                }
-                reply.send(sockets.get(username).getOut());
-            }
-            catch(Exception e) {
-                ErrorLogger.get().log(e.toString());
-                e.printStackTrace();
-                reply = new ResultMessage(qmsg.getId(), null);
-                reply.send(sockets.get(username).getOut());
             }
             
             AccessLogger.get().log(username + " sent SQL query " + 
