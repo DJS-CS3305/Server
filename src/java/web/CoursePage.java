@@ -19,7 +19,8 @@ public class CoursePage {
     private static final String LECTURER_REPLACE = "#[[lecturer]]#";
     private static final String LOCATION_REPLACE = "#[[location]]#";
     private static final String DATES_REPLACE = "#[[dates]]#";
-    private static final String TIME_REPLACE = "#[[time]]#";
+    private static final String START_TIME_REPLACE = "#[[s_time]]#";
+    private static final String CLASS_TIME_REPLACE = "#[[c_time]]#";
     private static final String FEE_REPLACE = "#[[fee]]#";
     private static final String DESCRIPTION_REPLACE = "#[[desc]]#";
     private static final String CAPACITY_REPLACE = "#[[cap]]#";
@@ -28,7 +29,8 @@ public class CoursePage {
     private static final String BODY_TEMPLATE = 
             "<h1>" + CODE_REPLACE + " Course Details</h1>" + 
             "<p>Runs from: " + DATES_REPLACE + "</p>" +
-            "<p>Time: " + TIME_REPLACE + "</p>" +
+            "<p>Start time: " + START_TIME_REPLACE + "</p>" +
+            "<p>Class duration: " + CLASS_TIME_REPLACE + "</p>" +
             "<p>Lecturer: " + LECTURER_REPLACE + "</p>" +
             "<p>Location: " + LOCATION_REPLACE + "</p>" +
             "<p>Cost: €" + FEE_REPLACE + "</p>" + 
@@ -47,11 +49,11 @@ public class CoursePage {
      * @param code The course code of this webpage.
      */
     public CoursePage(String code) {
-        ResultSet results = Query.query("SELECT * FROM Courses WHERE code = " + 
-                code + ";");
+        ResultSet results = Query.query("SELECT * FROM Courses WHERE code = '" + 
+                code + "';");
         ResultSet curCapacityResults = 
                 Query.query("SELECT COUNT(*) AS curCapacity FROM " + 
-                "Registrations WHERE code = " + code + ";");
+                "Registrations WHERE courseCode = '" + code + "';");
         
         this.code = code;
         
@@ -60,8 +62,9 @@ public class CoursePage {
             curCapacityResults.next();
             startDate = results.getDate("startDate");
             Date endDate = new Date(startDate.getTime() + 
-                    (1000 * 60 * 60 * 24 * results.getInt("duration")));
-            Time time = results.getTime("time");
+                    (1000 * 60 * 60 * 24 * results.getInt("courseDuration")));
+            Time startTime = results.getTime("startTime");
+            Time classDuration = new Time(results.getInt("classDuration") * 60 * 1000);
             String lecturer = results.getString("lecturer");
             String location = results.getString("location");
             int fee = results.getInt("fee");
@@ -69,9 +72,14 @@ public class CoursePage {
             int curCapacity = curCapacityResults.getInt("curCapacity");
             String desc = results.getString("description");
             
+            System.out.println(title);
+            System.out.println(body);
+            System.out.println("###########################");
             title = TITLE_TEMPLATE.replaceAll(CODE_REPLACE, code);
-            body = processQuery(code, startDate, endDate, time, lecturer, 
-                    location, fee, maxCapacity, curCapacity, desc);
+            body = processQuery(code, startDate, endDate, startTime, lecturer, 
+                    location, fee, maxCapacity, curCapacity, desc, classDuration);
+            System.out.println(title);
+            System.out.println(body);
         }
         catch(Exception e) {
             ErrorLogger.get().log(e.toString());
@@ -87,8 +95,8 @@ public class CoursePage {
      * Adds a hit to the counter on the database.
      */
     public void addHit() {
-        Query.query("UPDATE Courses SET hits = hits + 1 WHERE code = " +
-                code + ";");
+        Query.query("UPDATE Courses SET hits = hits + 1 WHERE code = '" +
+                code + "';");
     }
     
     /**
@@ -107,8 +115,9 @@ public class CoursePage {
      * @return The body content of the page.
      */
     private static String processQuery(String code, Date start, Date end, 
-            Time time, String lecturer, String location, int fee, 
-            int maxCapacity, int curCapacity, String descriptionPseudo) {
+            Time startTime, String lecturer, String location, int fee, 
+            int maxCapacity, int curCapacity, String descriptionPseudo,
+            Time classDuration) {
         String output = BODY_TEMPLATE;
         
         String feeWithDecimal = String.valueOf(((double)fee) / 100.0);
@@ -121,7 +130,8 @@ public class CoursePage {
         output = output.replaceAll(LOCATION_REPLACE, location);
         output = output.replaceAll(DATES_REPLACE, dates);
         output = output.replaceAll(FEE_REPLACE, feeWithDecimal);
-        output = output.replaceAll(TIME_REPLACE, time.toString());
+        output = output.replaceAll(START_TIME_REPLACE, startTime.toString());
+        output = output.replaceAll(CLASS_TIME_REPLACE, classDuration.toString());
         output = output.replaceAll(CAPACITY_REPLACE, capString);
         output = output.replaceAll(DESCRIPTION_REPLACE, description);
         

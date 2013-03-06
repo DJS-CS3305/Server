@@ -1,6 +1,5 @@
 package sql;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import log.ErrorLogger;
@@ -21,10 +20,9 @@ public class Query {
      */
     public static ResultSet query(String query) {
         ResultSet output = null;
-        Connection con = Connector.getConnection();
         
         try {
-            Statement st = con.createStatement();
+            Statement st = Connector.getConnection().createStatement();
             
             if(query.startsWith("SELECT")) {
                 output = st.executeQuery(query);

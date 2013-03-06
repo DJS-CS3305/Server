@@ -132,6 +132,66 @@ public class Server extends Thread {
                 AccessLogger.get().log(username + " sent unacknowledgement.");
             }
         }
+        else if(msg instanceof UserReplyMessage) {
+            //trying to reply to user messages
+            int originalMessageId = (Integer) 
+                    msg.getContent().get(UserReplyMessage.ORIGINAL_MESSAGE_ID);
+            String replyText = msg.getContent().get(UserReplyMessage.REPLY_TEXT).toString();
+            
+            //check if message has been replied to
+            boolean repliedTo = true;
+            String query = "SELECT * FROM Messages WHERE replyId = " 
+                    + originalMessageId + ";";
+            ResultSet rs = Query.query(query);
+            
+            try {
+                rs.last();
+                repliedTo = (rs.getRow() == 0);
+            }
+            catch(Exception e) {
+                ErrorLogger.get().log(e.toString());
+                e.printStackTrace();
+            }
+            
+            if(repliedTo) {
+                //message was replied to already or there was a problem in accessing the DB
+                AckMessage nack = new AckMessage(msg.getId(), false);
+                nack.send(sockets.get(username).getOut());
+                
+                AccessLogger.get().log(username + " sent reply to already replied message ID#" + 
+                        originalMessageId + ".");
+            }
+            else {
+                //message hasn't been replied to, so add this reply
+                query = "SELECT MAX(id) AS max FROM Messages;";
+                rs = Query.query(query);
+                
+                try {
+                    rs.next();
+                    int max = rs.getInt(1);
+                    
+                    query = "UPDATE Messages SET replyId = " + (max + 1) +
+                            "WHERE id = " + originalMessageId;
+                    Query.query(query);
+                    query = "INSERT INTO Messages(username, content, replyId) VALUES ('"
+                            + username + "', '" + replyText + "', NULL);";
+                    Query.query(query);
+                    
+                    AckMessage ack = new AckMessage(msg.getId(), true);
+                    ack.send(sockets.get(username).getOut());
+                    
+                    AccessLogger.get().log(username + " sent reply to message ID#" + 
+                        originalMessageId + " successfully.");
+                }
+                catch(Exception e) {
+                    ErrorLogger.get().log(e.toString());
+                    e.printStackTrace();
+                    
+                    AccessLogger.get().log(username + " sent reply to message ID#" + 
+                        originalMessageId + ", but there was a server fault.");
+                }
+            }
+        }
     }
     
     //getters
