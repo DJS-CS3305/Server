@@ -10,9 +10,9 @@ import web.HTMLTransformer;
 public class HTMLTest {
     public static void test() {
         String s1 = "A test of paragraphing.\n\nThis should see if the "
-                + "paragraphing features work right.\n\nThe last two"
+                + "paragraphing features work right.\n\nThe last two "
                 + "sentences should be their own paragraphs.\nBut this one "
-                + "should be two lines seperated by a line break.";
+                + "should be two lines seperated by a space.";
         String s2 = "A test of linking: <linkstart to=http://google.ie "
                 + "text=Cover text here#@# linkend>";
         String s3 = "A test of imaging: <imagestart link=panda.png "

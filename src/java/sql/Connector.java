@@ -1,7 +1,11 @@
 package sql;
 
+import java.io.File;
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.Date;
 import log.ErrorLogger;
 
 /**
@@ -56,6 +60,42 @@ public class Connector {
         }
         finally {
             con = null;
+        }
+    }
+    
+    /**
+     * Dumps the database to the given local directory.
+     * Uses code from http://www.bosit.be/blog/2008/03/29/dumping-a-mysql-database-from-java/
+     * 
+     * @param directory A local directory.
+     */
+    public static void dump(String directory) {
+        String cmd = "mysqldump " + DATABASE + " -h " + ADDRESS + " -u " +
+                USERNAME + " -p " + PASSWORD;
+        File file = new File(directory + "/dump" + new Date().toString() + ".sql");
+        Runtime rt = Runtime.getRuntime();
+        PrintStream printer;
+        
+        try {
+            Process child = rt.exec(cmd);
+            printer = new PrintStream(file);
+            InputStream in = child.getInputStream();
+            int ch;
+            
+            while((ch = in.read()) != 1) {
+                //write dump to file
+                printer.write(ch);
+            }
+            
+            InputStream err = child.getErrorStream();
+            while((ch = err.read()) != 1) {
+                //write errors to screen
+                System.out.write(ch);
+            }
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            ErrorLogger.get().log(e.toString());
         }
     }
 }

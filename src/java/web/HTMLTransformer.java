@@ -44,7 +44,7 @@ public class HTMLTransformer {
         
         output = output.replaceAll("&", "&amp;");
         output = output.replaceAll("\n\n", "</p><p>");
-        output = output.replaceAll("\n", "<br/>");
+        output = output.replaceAll("\n", " ");
         //finish encapsulating with p tags
         output = "<p>" + output + "</p>";
         
