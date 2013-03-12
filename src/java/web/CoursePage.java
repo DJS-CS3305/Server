@@ -16,6 +16,7 @@ import sql.Query;
  */
 public class CoursePage {
     private static final String CODE_REPLACE = "#[[code]]#";
+    private static final String NAME_REPLACE = "#[[name]]#";
     private static final String LECTURER_REPLACE = "#[[lecturer]]#";
     private static final String LOCATION_REPLACE = "#[[location]]#";
     private static final String DATES_REPLACE = "#[[dates]]#";
@@ -27,7 +28,7 @@ public class CoursePage {
     private static final String TITLE_TEMPLATE = 
             "<title>" + CODE_REPLACE + " Course Details</title>";
     private static final String BODY_TEMPLATE = 
-            "<h1>" + CODE_REPLACE + " Course Details</h1>" + 
+            "<h1>" + CODE_REPLACE + " - " + NAME_REPLACE + "</h1>" + 
             "<p>Runs from: " + DATES_REPLACE + "</p>" +
             "<p>Start time: " + START_TIME_REPLACE + "</p>" +
             "<p>Class duration: " + CLASS_TIME_REPLACE + "</p>" +
@@ -36,8 +37,8 @@ public class CoursePage {
             "<p>Cost: €" + FEE_REPLACE + "</p>" + 
             "<p>Capactiy: " + CAPACITY_REPLACE + "</p>" +
             "<div><p>Course Description: </p>" + DESCRIPTION_REPLACE + "</div>";
-    private static SimpleDateFormat DATE_FORMAT = 
-            new SimpleDateFormat("dd/MM/yyyy");
+    private static SimpleDateFormat DATE_FORMAT =  new SimpleDateFormat("dd/MM/yyyy");
+    private static SimpleDateFormat TIME_FORMAT =  new SimpleDateFormat("HH:mm");
     
     private String code;
     private String title;
@@ -60,26 +61,25 @@ public class CoursePage {
         try {
             results.next();
             curCapacityResults.next();
+            
+            String name = results.getString("name");
             startDate = results.getDate("startDate");
             Date endDate = new Date(startDate.getTime() + 
                     (1000 * 60 * 60 * 24 * results.getInt("courseDuration")));
             Time startTime = results.getTime("startTime");
-            Time classDuration = new Time(results.getInt("classDuration") * 60 * 1000);
+            long duration = results.getInt("classDuration") * 60 * 1000;
+            //need to offset by 1 hour to display correctly
+            Date classDuration = new Date(duration - 3600000);
             String lecturer = results.getString("lecturer");
             String location = results.getString("location");
             int fee = results.getInt("fee");
             int maxCapacity = results.getInt("capacity");
             int curCapacity = curCapacityResults.getInt("curCapacity");
-            String desc = results.getString("description");
+            String descPseudo = results.getString("description");
             
-            System.out.println(title);
-            System.out.println(body);
-            System.out.println("###########################");
-            title = TITLE_TEMPLATE.replaceAll(CODE_REPLACE, code);
-            body = processQuery(code, startDate, endDate, startTime, lecturer, 
-                    location, fee, maxCapacity, curCapacity, desc, classDuration);
-            System.out.println(title);
-            System.out.println(body);
+            title = TITLE_TEMPLATE.replace(CODE_REPLACE, code);
+            body = processQuery(code, name, startDate, endDate, startTime, lecturer, 
+                    location, fee, maxCapacity, curCapacity, descPseudo, classDuration);
         }
         catch(Exception e) {
             ErrorLogger.get().log(e.toString());
@@ -114,26 +114,35 @@ public class CoursePage {
      * @param descriptionPseudo Pseudo-HTML of the course description.
      * @return The body content of the page.
      */
-    private static String processQuery(String code, Date start, Date end, 
-            Time startTime, String lecturer, String location, int fee, 
+    private static String processQuery(String code, String name, Date start, 
+            Date end, Time startTime, String lecturer, String location, int fee, 
             int maxCapacity, int curCapacity, String descriptionPseudo,
-            Time classDuration) {
+            Date classDuration) {
         String output = BODY_TEMPLATE;
         
+        //format for appearance
         String feeWithDecimal = String.valueOf(((double)fee) / 100.0);
         String capString = curCapacity + "/" + maxCapacity;
         String description = HTMLTransformer.toHTML(descriptionPseudo);
         String dates = DATE_FORMAT.format(start) + " to " + DATE_FORMAT.format(end);
+        String formattedDuration = TIME_FORMAT.format(classDuration);
+        String formattedStart = TIME_FORMAT.format(startTime);
         
-        output = output.replaceAll(CODE_REPLACE, code);
-        output = output.replaceAll(LECTURER_REPLACE, lecturer);
-        output = output.replaceAll(LOCATION_REPLACE, location);
-        output = output.replaceAll(DATES_REPLACE, dates);
-        output = output.replaceAll(FEE_REPLACE, feeWithDecimal);
-        output = output.replaceAll(START_TIME_REPLACE, startTime.toString());
-        output = output.replaceAll(CLASS_TIME_REPLACE, classDuration.toString());
-        output = output.replaceAll(CAPACITY_REPLACE, capString);
-        output = output.replaceAll(DESCRIPTION_REPLACE, description);
+        //cuts off leading zero if one exists
+        if(formattedDuration.substring(0, 1).equals("0")) {
+            formattedDuration = formattedDuration.substring(1);
+        }
+        
+        output = output.replace(CODE_REPLACE, code);
+        output = output.replace(NAME_REPLACE, name);
+        output = output.replace(LECTURER_REPLACE, lecturer);
+        output = output.replace(LOCATION_REPLACE, location);
+        output = output.replace(DATES_REPLACE, dates);
+        output = output.replace(FEE_REPLACE, feeWithDecimal);
+        output = output.replace(START_TIME_REPLACE, formattedStart);
+        output = output.replace(CLASS_TIME_REPLACE, formattedDuration);
+        output = output.replace(CAPACITY_REPLACE, capString);
+        output = output.replace(DESCRIPTION_REPLACE, description);
         
         return output;
     }

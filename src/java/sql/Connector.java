@@ -34,6 +34,7 @@ public class Connector {
                     DATABASE;
             
             try {
+                Class.forName("com.mysql.jdbc.Driver");
                 con = DriverManager.getConnection(url, USERNAME, PASSWORD);
             }
             catch(Exception e) {
