@@ -21,6 +21,7 @@
         <%= pageContent.getBody() %>
         <%
             if(pageContent.getStartDate().after(new Date())) {
+                //print registering information
                 out.print("<p>Stuff for registering goes here</p>");
             }
         %>

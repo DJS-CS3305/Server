@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="web.LecturerPage" %>
+<%-- The lecturer name should be supplied by GET --%>
 <% String name = request.getParameter("name"); %>
 <% LecturerPage pageContent = new LecturerPage(name); %>
 

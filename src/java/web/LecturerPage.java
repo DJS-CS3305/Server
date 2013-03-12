@@ -19,7 +19,6 @@ public class LecturerPage {
             "<h1>" + NAME_REPLACE + "</h1>" + 
             "<div>" + DESCRIPTION_REPLACE + "</div>";
     
-    private String name;
     private String title;
     private String body;
     
@@ -29,8 +28,6 @@ public class LecturerPage {
      * @param name The full name of the lecturer.
      */
     public LecturerPage(String name) {
-        this.name = name;
-        
         ResultSet results = Query.query("SELECT * FROM Lecturers WHERE " +
                 "name = '" + name + "';");
         
@@ -38,9 +35,9 @@ public class LecturerPage {
             results.next();
             String description = HTMLTransformer.toHTML(results.getString(2));
             
-            title = TITLE_TEMPLATE.replaceAll(NAME_REPLACE, name);
-            body = BODY_TEMPLATE.replaceAll(NAME_REPLACE, name);
-            body = body.replaceAll(DESCRIPTION_REPLACE, description);
+            title = TITLE_TEMPLATE.replace(NAME_REPLACE, name);
+            body = BODY_TEMPLATE.replace(NAME_REPLACE, name);
+            body = body.replace(DESCRIPTION_REPLACE, description);
         }
         catch(Exception e) {
             ErrorLogger.get().log(e.toString());
