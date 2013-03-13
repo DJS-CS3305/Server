@@ -1,0 +1,6 @@
+com.paypal.sdk.core
+com.paypal.sdk.core.nvp
+com.paypal.sdk.exceptions
+com.paypal.sdk.profiles
+com.paypal.sdk.services
+com.paypal.sdk.util
