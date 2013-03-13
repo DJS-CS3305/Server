@@ -364,3 +364,133 @@ INFO:
 Mar 06, 2013 3:09:53 PM log.AbstractLogger log
 INFO: 
 	Wed Mar 06 15:09:53 GMT 2013 - test sent SQL query SELECT * FROM Courses;.
+Mar 12, 2013 5:20:32 PM log.AbstractLogger log
+INFO: 
+	Tue Mar 12 17:20:32 GMT 2013 - Admin001 connected.
+Mar 12, 2013 5:20:35 PM log.AbstractLogger log
+INFO: 
+	Tue Mar 12 17:20:35 GMT 2013 - Admin001 sent SQL query SELECT * FROM Courses;.
+Mar 12, 2013 5:20:52 PM log.AbstractLogger log
+INFO: 
+	Tue Mar 12 17:20:52 GMT 2013 - Admin001 sent SQL query SELECT name FROM Lecturers;.
+Mar 12, 2013 5:24:20 PM log.AbstractLogger log
+SEVERE: 
+	Tue Mar 12 17:24:20 GMT 2013 - java.net.SocketException: Connection reset
+Mar 12, 2013 5:27:02 PM log.AbstractLogger log
+INFO: 
+	Tue Mar 12 17:27:02 GMT 2013 - Admin001 connected.
+Mar 12, 2013 5:27:08 PM log.AbstractLogger log
+INFO: 
+	Tue Mar 12 17:27:08 GMT 2013 - Admin001 sent SQL query SELECT * FROM Courses;.
+Mar 12, 2013 5:27:14 PM log.AbstractLogger log
+INFO: 
+	Tue Mar 12 17:27:14 GMT 2013 - Admin001 sent SQL query SELECT name FROM Lecturers;.
+Mar 12, 2013 5:27:52 PM log.AbstractLogger log
+INFO: 
+	Tue Mar 12 17:27:52 GMT 2013 - Admin001 sent SQL query SELECT name FROM Lecturers;.
+Mar 12, 2013 5:28:03 PM log.AbstractLogger log
+SEVERE: 
+	Tue Mar 12 17:28:03 GMT 2013 - java.net.SocketException: Connection reset
+Mar 12, 2013 5:28:25 PM log.AbstractLogger log
+INFO: 
+	Tue Mar 12 17:28:25 GMT 2013 - Admin001 connected.
+Mar 12, 2013 5:28:32 PM log.AbstractLogger log
+INFO: 
+	Tue Mar 12 17:28:32 GMT 2013 - Admin001 sent SQL query SELECT * FROM Users;.
+Mar 12, 2013 5:29:28 PM log.AbstractLogger log
+INFO: 
+	Tue Mar 12 17:29:28 GMT 2013 - Admin001 sent SQL query SELECT * FROM Courses;.
+Mar 12, 2013 5:29:30 PM log.AbstractLogger log
+INFO: 
+	Tue Mar 12 17:29:30 GMT 2013 - Admin001 sent SQL query SELECT name FROM Lecturers;.
+Mar 12, 2013 5:30:15 PM log.AbstractLogger log
+SEVERE: 
+	Tue Mar 12 17:30:15 GMT 2013 - java.net.SocketException: Connection reset
+Mar 12, 2013 5:33:40 PM log.AbstractLogger log
+INFO: 
+	Tue Mar 12 17:33:40 GMT 2013 - Admin001 connected.
+Mar 12, 2013 5:33:43 PM log.AbstractLogger log
+INFO: 
+	Tue Mar 12 17:33:43 GMT 2013 - Admin001 sent SQL query SELECT * FROM Courses;.
+Mar 12, 2013 5:33:45 PM log.AbstractLogger log
+INFO: 
+	Tue Mar 12 17:33:45 GMT 2013 - Admin001 sent SQL query SELECT name FROM Lecturers;.
+Mar 12, 2013 5:41:35 PM log.AbstractLogger log
+INFO: 
+	Tue Mar 12 17:41:35 GMT 2013 - Admin001 sent SQL query SELECT * FROM Courses WHERE code = 'UB1209';.
+Mar 12, 2013 5:41:35 PM log.AbstractLogger log
+SEVERE: 
+	Tue Mar 12 17:41:35 GMT 2013 - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(lecturer = 'Prof. Daffyd Lloyd', location = 'Western Gateway Building G07', fee' at line 1 Query [UPDATE Courses SET (lecturer = 'Prof. Daffyd Lloyd', location = 'Western Gateway Building G07', fee = 599, description = 'Learn how to weave baskets underwater!
+
+Have a meaningless picture:
+<imagestart link=http://i.imgur.com/RlPWE.jpg height=480 width=640 imageend>', startDate = '2013-06-15', courseDuration = 5, classDuration = 120, capacity = 3, startTime = '14:00, name = 'Basics of Underwater Basket Weaving') WHERE code = 'UB1209';] has failed.
+Mar 12, 2013 5:41:35 PM log.AbstractLogger log
+INFO: 
+	Tue Mar 12 17:41:35 GMT 2013 - Admin001 sent SQL query UPDATE Courses SET (lecturer = 'Prof. Daffyd Lloyd', location = 'Western Gateway Building G07', fee = 599, description = 'Learn how to weave baskets underwater!
+
+Have a meaningless picture:
+<imagestart link=http://i.imgur.com/RlPWE.jpg height=480 width=640 imageend>', startDate = '2013-06-15', courseDuration = 5, classDuration = 120, capacity = 3, startTime = '14:00, name = 'Basics of Underwater Basket Weaving') WHERE code = 'UB1209';.
+Mar 12, 2013 5:43:20 PM log.AbstractLogger log
+INFO: 
+	Tue Mar 12 17:43:20 GMT 2013 - Admin001 sent SQL query SELECT * FROM Courses;.
+Mar 12, 2013 5:43:28 PM log.AbstractLogger log
+INFO: 
+	Tue Mar 12 17:43:28 GMT 2013 - Admin001 sent SQL query SELECT name FROM Lecturers;.
+Mar 12, 2013 5:44:16 PM log.AbstractLogger log
+INFO: 
+	Tue Mar 12 17:44:16 GMT 2013 - Admin001 sent SQL query SELECT * FROM Courses WHERE code = 'UB1209';.
+Mar 12, 2013 5:44:16 PM log.AbstractLogger log
+SEVERE: 
+	Tue Mar 12 17:44:16 GMT 2013 - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(lecturer = 'Frank West', location = 'Western Gateway Building G07', fee = 599, ' at line 1 Query [UPDATE Courses SET (lecturer = 'Frank West', location = 'Western Gateway Building G07', fee = 599, description = 'Have a meaningless picture:
+
+<imagestart link=http://i.imgur.com/RlPWE.jpg height=480 width=640 imageend>', startDate = '2013-06-15', courseDuration = 5, classDuration = 120, capacity = 3, startTime = '14:00, name = 'Basics of Underwater Basket Weaving') WHERE code = 'UB1209';] has failed.
+Mar 12, 2013 5:44:16 PM log.AbstractLogger log
+INFO: 
+	Tue Mar 12 17:44:16 GMT 2013 - Admin001 sent SQL query UPDATE Courses SET (lecturer = 'Frank West', location = 'Western Gateway Building G07', fee = 599, description = 'Have a meaningless picture:
+
+<imagestart link=http://i.imgur.com/RlPWE.jpg height=480 width=640 imageend>', startDate = '2013-06-15', courseDuration = 5, classDuration = 120, capacity = 3, startTime = '14:00, name = 'Basics of Underwater Basket Weaving') WHERE code = 'UB1209';.
+Mar 12, 2013 5:45:08 PM log.AbstractLogger log
+SEVERE: 
+	Tue Mar 12 17:45:08 GMT 2013 - java.net.SocketException: Connection reset
+Mar 12, 2013 5:54:10 PM log.AbstractLogger log
+INFO: 
+	Tue Mar 12 17:54:10 GMT 2013 - Admin001 connected.
+Mar 12, 2013 5:54:14 PM log.AbstractLogger log
+INFO: 
+	Tue Mar 12 17:54:14 GMT 2013 - Admin001 sent SQL query SELECT * FROM Courses;.
+Mar 12, 2013 5:54:15 PM log.AbstractLogger log
+INFO: 
+	Tue Mar 12 17:54:15 GMT 2013 - Admin001 sent SQL query SELECT name FROM Lecturers;.
+Mar 12, 2013 5:54:51 PM log.AbstractLogger log
+INFO: 
+	Tue Mar 12 17:54:51 GMT 2013 - Admin001 sent SQL query SELECT * FROM Courses WHERE code = 'UB1209';.
+Mar 12, 2013 5:54:51 PM log.AbstractLogger log
+SEVERE: 
+	Tue Mar 12 17:54:51 GMT 2013 - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(lecturer = 'Prof. Daffyd Lloyd', location = 'Western Gateway Building G07', fee' at line 1 Query [UPDATE Courses SET (lecturer = 'Prof. Daffyd Lloyd', location = 'Western Gateway Building G07', fee = 599, description = 'Have a meaningless image:
+
+<imagestart link=http://i.imgur.com/RlPWE.jpg height=480 width=640 imageend>', startDate = '2013-06-15', courseDuration = 5, classDuration = 120, capacity = 3, startTime = '14:00', name = 'Basics of Underwater Basket Weaving') WHERE code = 'UB1209';] has failed.
+Mar 12, 2013 5:54:51 PM log.AbstractLogger log
+INFO: 
+	Tue Mar 12 17:54:51 GMT 2013 - Admin001 sent SQL query UPDATE Courses SET (lecturer = 'Prof. Daffyd Lloyd', location = 'Western Gateway Building G07', fee = 599, description = 'Have a meaningless image:
+
+<imagestart link=http://i.imgur.com/RlPWE.jpg height=480 width=640 imageend>', startDate = '2013-06-15', courseDuration = 5, classDuration = 120, capacity = 3, startTime = '14:00', name = 'Basics of Underwater Basket Weaving') WHERE code = 'UB1209';.
+Mar 12, 2013 5:57:10 PM log.AbstractLogger log
+SEVERE: 
+	Tue Mar 12 17:57:10 GMT 2013 - java.net.SocketException: Connection reset
+Mar 12, 2013 5:57:47 PM log.AbstractLogger log
+INFO: 
+	Tue Mar 12 17:57:47 GMT 2013 - Admin001 connected.
+Mar 12, 2013 5:57:50 PM log.AbstractLogger log
+INFO: 
+	Tue Mar 12 17:57:50 GMT 2013 - Admin001 sent SQL query SELECT * FROM Courses;.
+Mar 12, 2013 5:57:53 PM log.AbstractLogger log
+INFO: 
+	Tue Mar 12 17:57:53 GMT 2013 - Admin001 sent SQL query SELECT name FROM Lecturers;.
+Mar 12, 2013 5:58:18 PM log.AbstractLogger log
+INFO: 
+	Tue Mar 12 17:58:18 GMT 2013 - Admin001 sent SQL query SELECT * FROM Courses WHERE code = 'UB1209';.
+Mar 12, 2013 5:58:18 PM log.AbstractLogger log
+INFO: 
+	Tue Mar 12 17:58:18 GMT 2013 - Admin001 sent SQL query UPDATE Courses SET lecturer = 'Prof. Daffyd Lloyd', location = 'Western Gateway Building G07', fee = 599, description = 'Have a new image:
+
+<imagestart link=http://i.imgur.com/YqRQl.jpg height=480 width=640 imageend>', startDate = '2013-06-15', courseDuration = 5, classDuration = 120, capacity = 3, startTime = '14:00', name = 'Basics of Underwater Basket Weaving' WHERE code = 'UB1209';.

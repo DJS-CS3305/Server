@@ -9,6 +9,6 @@ import test.*;
  */
 public class Main {
     public static void main(String[] args) {
-        HTMLTest.test();
+        MaintenanceTest.test();
     }
 }

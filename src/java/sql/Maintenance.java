@@ -1,12 +1,14 @@
 package sql;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import log.ErrorLogger;
-import java.io.File;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.FileWriter;
 
 /**
  * Class for doing the automatic maintenance on the database.
@@ -31,9 +33,10 @@ public class Maintenance {
         boolean successful = true;
         
         try {
-            dumpDatabase();
-            decrement();
+            dumpDatabase(); //must dump first to preserve state for archiving
+            decrementDaysRemaining();
             removeOldRows();
+            startRegistrations();
             //set maintenance time to the next day.
             adjustTime(NEXT_MAINTENANCE.getTime() + (1000 * 60 * 60 * 24));
         }
@@ -41,6 +44,7 @@ public class Maintenance {
             e.printStackTrace();
             ErrorLogger.get().log(e.toString());
             ErrorLogger.get().log("Database maintenance has failed.");
+            successful = false;
         }
         
         return successful;
@@ -49,7 +53,7 @@ public class Maintenance {
     /**
      * Decrements the days remaining counters for active registrations.
      */
-    private static void decrement() throws SQLException {
+    private static void decrementDaysRemaining() throws SQLException {
         Query.query("UPDATE Registrations SET daysRemaining = daysRemaining - 1 " +
                 "WHERE hasStarted = TRUE AND wasRefunded = FALSE AND " +
                 "daysRemaining > 0;");
@@ -64,6 +68,36 @@ public class Maintenance {
     }
     
     /**
+     * Activates the registrations for courses that start today if the 
+     * maintenance is performed before midday, or tomorrow if the maintenance
+     * is done after midday.
+     */
+    private static void startRegistrations() throws SQLException {
+        String activationDay;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat hourFormat = new SimpleDateFormat("hh");
+        
+        if(Integer.parseInt(hourFormat.format(NEXT_MAINTENANCE)) > 11) {
+            //after midday, use tomorrow
+            Date tomorrow = new Date(NEXT_MAINTENANCE.getTime() + (1000 * 60 * 60 * 24));
+            activationDay = dateFormat.format(tomorrow);
+        }
+        else {
+            //before midday, use today
+            activationDay = dateFormat.format(NEXT_MAINTENANCE);
+        }
+        
+        ResultSet updateCourses = Query.query("SELECT code FROM Courses WHERE " + 
+                "startDate = '" + activationDay + "';");
+        
+        while(updateCourses.next()) {
+            String code = updateCourses.getString(1);
+            Query.query("UPDATE Registrations SET hasStarted = TRUE WHERE " +
+                    "courseCode = '" + code + "';");
+        }
+    }
+    
+    /**
      * Dumps the database to a file for archiving.
      */
     private static void dumpDatabase() {
@@ -74,7 +108,8 @@ public class Maintenance {
      * Dumps the maintenance time to file.
      */
     private static void dumpTime() throws IOException {
-        File file = new File(TIME_FILEPATH);
+        String canonPath = new File(TIME_FILEPATH).getCanonicalPath();
+        File file = new File(canonPath + "/" + TIME_FILENAME);
         file.delete();
         BufferedWriter bw = new BufferedWriter(new FileWriter(file));
         bw.write(String.valueOf(NEXT_MAINTENANCE.getTime()));
@@ -92,11 +127,10 @@ public class Maintenance {
     }
     
     /**
-     * Returns true if it is time for maintenance and dumps the time to file.
+     * Returns true if it is time for maintenance.
      * @return True if it is time for maintenance.
      */
     public static boolean isMaintenanceTime() throws IOException {
-        dumpTime();
         return NEXT_MAINTENANCE.before(new Date());
     }
 }
