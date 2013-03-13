@@ -494,3 +494,45 @@ INFO:
 	Tue Mar 12 17:58:18 GMT 2013 - Admin001 sent SQL query UPDATE Courses SET lecturer = 'Prof. Daffyd Lloyd', location = 'Western Gateway Building G07', fee = 599, description = 'Have a new image:
 
 <imagestart link=http://i.imgur.com/YqRQl.jpg height=480 width=640 imageend>', startDate = '2013-06-15', courseDuration = 5, classDuration = 120, capacity = 3, startTime = '14:00', name = 'Basics of Underwater Basket Weaving' WHERE code = 'UB1209';.
+Mar 13, 2013 12:07:03 PM log.AbstractLogger log
+INFO: 
+	Wed Mar 13 12:07:03 GMT 2013 - Admin001 connected.
+Mar 13, 2013 12:07:07 PM log.AbstractLogger log
+INFO: 
+	Wed Mar 13 12:07:07 GMT 2013 - Admin001 sent SQL query SELECT * FROM UnrepliedUserMessages;.
+Mar 13, 2013 12:07:48 PM log.AbstractLogger log
+SEVERE: 
+	Wed Mar 13 12:07:48 GMT 2013 - java.net.SocketException: Connection reset
+Mar 13, 2013 12:13:28 PM log.AbstractLogger log
+INFO: 
+	Wed Mar 13 12:13:28 GMT 2013 - Admin001 connected.
+Mar 13, 2013 12:13:30 PM log.AbstractLogger log
+INFO: 
+	Wed Mar 13 12:13:30 GMT 2013 - Admin001 sent SQL query SELECT * FROM UnrepliedUserMessages;.
+Mar 13, 2013 12:13:50 PM log.AbstractLogger log
+INFO: 
+	Wed Mar 13 12:13:50 GMT 2013 - Admin001 sent reply to already replied message ID#1.
+Mar 13, 2013 12:16:58 PM log.AbstractLogger log
+INFO: 
+	Wed Mar 13 12:16:58 GMT 2013 - Admin001 connected.
+Mar 13, 2013 12:17:01 PM log.AbstractLogger log
+INFO: 
+	Wed Mar 13 12:17:01 GMT 2013 - Admin001 sent SQL query SELECT * FROM UnrepliedUserMessages;.
+Mar 13, 2013 12:17:15 PM log.AbstractLogger log
+SEVERE: 
+	Wed Mar 13 12:17:15 GMT 2013 - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'id = 1' at line 1 Query [UPDATE Messages SET replyId = 3WHERE id = 1] has failed.
+Mar 13, 2013 12:17:15 PM log.AbstractLogger log
+SEVERE: 
+	Wed Mar 13 12:17:15 GMT 2013 - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: INSERT command denied to user 'backend'@'localhost' for table 'messages' Query [INSERT INTO Messages(username, content, replyId) VALUES ('Admin001', 'An admin reply to a message.', NULL);] has failed.
+Mar 13, 2013 12:17:15 PM log.AbstractLogger log
+INFO: 
+	Wed Mar 13 12:17:15 GMT 2013 - Admin001 sent reply to message ID#1 successfully.
+Mar 13, 2013 12:20:03 PM log.AbstractLogger log
+INFO: 
+	Wed Mar 13 12:20:03 GMT 2013 - Admin001 connected.
+Mar 13, 2013 12:20:06 PM log.AbstractLogger log
+INFO: 
+	Wed Mar 13 12:20:06 GMT 2013 - Admin001 sent SQL query SELECT * FROM UnrepliedUserMessages;.
+Mar 13, 2013 12:20:21 PM log.AbstractLogger log
+INFO: 
+	Wed Mar 13 12:20:21 GMT 2013 - Admin001 sent reply to message ID#1 successfully.

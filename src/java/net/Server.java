@@ -146,7 +146,7 @@ public class Server extends Thread {
             
             try {
                 rs.last();
-                repliedTo = (rs.getRow() == 0);
+                repliedTo = !(rs.getRow() == 0);
             }
             catch(Exception e) {
                 ErrorLogger.get().log(e.toString());
@@ -171,10 +171,10 @@ public class Server extends Thread {
                     int max = rs.getInt(1);
                     
                     query = "UPDATE Messages SET replyId = " + (max + 1) +
-                            "WHERE id = " + originalMessageId;
+                            " WHERE id = " + originalMessageId;
                     Query.query(query);
                     query = "INSERT INTO Messages(username, content, replyId) VALUES ('"
-                            + username + "', '" + replyText + "', NULL);";
+                            + username + "', '" + replyText + "', 0);";
                     Query.query(query);
                     
                     AckMessage ack = new AckMessage(msg.getId(), true);

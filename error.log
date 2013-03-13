@@ -520,3 +520,30 @@ SEVERE:
 Mar 13, 2013 11:40:42 AM log.AbstractLogger log
 SEVERE: 
 	Wed Mar 13 11:40:42 GMT 2013 - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: DELETE command denied to user 'backend'@'localhost' for table 'registrations' Query [DELETE FROM Registrations WHERE wasRefunded = TRUE;] has failed.
+Mar 13, 2013 12:07:48 PM log.AbstractLogger log
+SEVERE: 
+	Wed Mar 13 12:07:48 GMT 2013 - java.net.SocketException: Connection reset
+Mar 13, 2013 12:13:28 PM log.AbstractLogger log
+INFO: 
+	Wed Mar 13 12:13:28 GMT 2013 - Admin001 connected.
+Mar 13, 2013 12:13:30 PM log.AbstractLogger log
+INFO: 
+	Wed Mar 13 12:13:30 GMT 2013 - Admin001 sent SQL query SELECT * FROM UnrepliedUserMessages;.
+Mar 13, 2013 12:13:50 PM log.AbstractLogger log
+INFO: 
+	Wed Mar 13 12:13:50 GMT 2013 - Admin001 sent reply to already replied message ID#1.
+Mar 13, 2013 12:14:46 PM log.AbstractLogger log
+SEVERE: 
+	Wed Mar 13 12:14:46 GMT 2013 - java.net.SocketException: Connection reset
+Mar 13, 2013 12:17:15 PM log.AbstractLogger log
+SEVERE: 
+	Wed Mar 13 12:17:15 GMT 2013 - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'id = 1' at line 1 Query [UPDATE Messages SET replyId = 3WHERE id = 1] has failed.
+Mar 13, 2013 12:17:15 PM log.AbstractLogger log
+SEVERE: 
+	Wed Mar 13 12:17:15 GMT 2013 - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: INSERT command denied to user 'backend'@'localhost' for table 'messages' Query [INSERT INTO Messages(username, content, replyId) VALUES ('Admin001', 'An admin reply to a message.', NULL);] has failed.
+Mar 13, 2013 12:17:15 PM log.AbstractLogger log
+INFO: 
+	Wed Mar 13 12:17:15 GMT 2013 - Admin001 sent reply to message ID#1 successfully.
+Mar 13, 2013 12:19:28 PM log.AbstractLogger log
+SEVERE: 
+	Wed Mar 13 12:19:28 GMT 2013 - java.net.SocketException: Connection reset
