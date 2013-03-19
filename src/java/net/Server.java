@@ -11,6 +11,7 @@ import log.AccessLogger;
 import log.ErrorLogger;
 import mail.Mailer;
 import sql.Query;
+import payments.Refunds;
 
 /**
  * Contains the methods for handling requests from connected administrator
@@ -190,6 +191,28 @@ public class Server extends Thread {
                     AccessLogger.get().log(username + " sent reply to message ID#" + 
                         originalMessageId + ", but there was a server fault.");
                 }
+            }
+        }
+        else if(msg instanceof RefundMessage) {
+            RefundMessage refundMsg = (RefundMessage) msg;
+            String refundUser = (String) refundMsg.getContent().get(RefundMessage.USERNAME);
+            String courseCode = (String) refundMsg.getContent().get(RefundMessage.CODE);
+            
+            ResultSet rs = Query.query("SELECT paypalUsername FROM Registrations " + 
+                    "WHERE username = '" + refundUser + "' AND courseCode = '" +
+                    courseCode + "';");
+            
+            try {
+                String transactionId = rs.getString(1);
+                Refunds.refund(transactionId);
+            }
+            catch(Exception e) {
+                ErrorLogger.get().log(e.toString());
+                e.printStackTrace();
+                    
+                AccessLogger.get().log(username + " tried to refund a registered "
+                        + "user " + refundUser + " for course " + courseCode + 
+                        ", but the process failed.");
             }
         }
     }
