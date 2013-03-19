@@ -2,7 +2,6 @@ package net;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.ResultSet;
@@ -10,8 +9,8 @@ import java.util.HashMap;
 import log.AccessLogger;
 import log.ErrorLogger;
 import mail.Mailer;
-import sql.Query;
 import payments.Refunds;
+import sql.Query;
 
 /**
  * Contains the methods for handling requests from connected administrator
@@ -21,7 +20,7 @@ import payments.Refunds;
  */
 public class Server extends Thread {
     private static Server INSTANCE = new Server();
-    public static final int AUTH_PORT = 579;
+    public static final int AUTH_PORT = 40579;
     
     private ServerSocket authPort;
     private HashMap<String, AdminServerSocket> sockets;
@@ -34,8 +33,7 @@ public class Server extends Thread {
      */
     private Server() {
         try {
-            authPort = new ServerSocket(AUTH_PORT, 0, InetAddress.getLocalHost());
-            System.out.println(authPort.getInetAddress().getHostAddress());
+            authPort = new ServerSocket(AUTH_PORT);
             sockets = new HashMap<String, AdminServerSocket>();
             activity = new HashMap<String, Integer>();
             auth = new Authenticator();

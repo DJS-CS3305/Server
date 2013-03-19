@@ -1,6 +1,7 @@
 package main;
 
-import test.*;
+import log.AccessLogger;
+import net.Server;
 
 /**
  * Main class for the server backend.
@@ -9,6 +10,7 @@ import test.*;
  */
 public class Main {
     public static void main(String[] args) {
-        ServerTest.test();
+        Server server = Server.get();
+        AccessLogger.get().log("Server started.");
     }
 }

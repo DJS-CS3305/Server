@@ -14,7 +14,7 @@ import log.ErrorLogger;
  * @author Stephen Fahy
  */
 public class AdminServerSocket implements Runnable {
-    private static final int START_PORT = 580;
+    private static final int START_PORT = 40580;
     private static final int MAX_PORTS = 1000;
     private static int PORTS_USED = 0;
     

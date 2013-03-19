@@ -602,3 +602,12 @@ INFO:
 Mar 19, 2013 10:53:23 AM log.AbstractLogger log
 INFO: 
 	Tue Mar 19 10:53:23 GMT 2013 - Admin001 sent SQL query SELECT * FROM UnrepliedUserMessages;.
+Mar 19, 2013 12:34:42 PM log.AbstractLogger log
+INFO: 
+	Tue Mar 19 12:34:42 GMT 2013 - Admin001 connected.
+Mar 19, 2013 12:38:59 PM log.AbstractLogger log
+INFO: 
+	Tue Mar 19 12:38:59 GMT 2013 - Server started.
+Mar 19, 2013 12:39:16 PM log.AbstractLogger log
+INFO: 
+	Tue Mar 19 12:39:16 GMT 2013 - Admin001 connected.
