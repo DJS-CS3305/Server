@@ -536,3 +536,69 @@ INFO:
 Mar 13, 2013 12:20:21 PM log.AbstractLogger log
 INFO: 
 	Wed Mar 13 12:20:21 GMT 2013 - Admin001 sent reply to message ID#1 successfully.
+Mar 19, 2013 10:29:20 AM log.AbstractLogger log
+INFO: 
+	Tue Mar 19 10:29:20 GMT 2013 - Admin001 connected.
+Mar 19, 2013 10:29:27 AM log.AbstractLogger log
+INFO: 
+	Tue Mar 19 10:29:27 GMT 2013 - Admin001 sent SQL query SELECT username, courseCode, daysRemaining, hasStarted, hasPaid, wasRefunded FROM Registrations WHERE daysRemaining > 0;.
+Mar 19, 2013 10:29:42 AM log.AbstractLogger log
+SEVERE: 
+	Tue Mar 19 10:29:42 GMT 2013 - java.sql.SQLException: Illegal operation on empty result set.
+Mar 19, 2013 10:29:42 AM log.AbstractLogger log
+INFO: 
+	Tue Mar 19 10:29:42 GMT 2013 - Admin001 tried to refund a registered user null for course null, but the process failed.
+Mar 19, 2013 10:33:11 AM log.AbstractLogger log
+INFO: 
+	Tue Mar 19 10:33:11 GMT 2013 - Admin001 connected.
+Mar 19, 2013 10:33:15 AM log.AbstractLogger log
+INFO: 
+	Tue Mar 19 10:33:15 GMT 2013 - Admin001 sent SQL query SELECT username, courseCode, daysRemaining, hasStarted, hasPaid, wasRefunded FROM Registrations WHERE daysRemaining > 0;.
+Mar 19, 2013 10:33:20 AM log.AbstractLogger log
+SEVERE: 
+	Tue Mar 19 10:33:20 GMT 2013 - java.sql.SQLException: Illegal operation on empty result set.
+Mar 19, 2013 10:33:20 AM log.AbstractLogger log
+INFO: 
+	Tue Mar 19 10:33:20 GMT 2013 - Admin001 tried to refund a registered user null for course null, but the process failed.
+Mar 19, 2013 10:34:54 AM log.AbstractLogger log
+INFO: 
+	Tue Mar 19 10:34:54 GMT 2013 - Admin001 connected.
+Mar 19, 2013 10:35:01 AM log.AbstractLogger log
+INFO: 
+	Tue Mar 19 10:35:01 GMT 2013 - Admin001 sent SQL query SELECT username, courseCode, daysRemaining, hasStarted, hasPaid, wasRefunded FROM Registrations WHERE daysRemaining > 0;.
+Mar 19, 2013 10:37:15 AM log.AbstractLogger log
+INFO: 
+	Tue Mar 19 10:37:15 GMT 2013 - Admin001 connected.
+Mar 19, 2013 10:37:17 AM log.AbstractLogger log
+INFO: 
+	Tue Mar 19 10:37:17 GMT 2013 - Admin001 sent SQL query SELECT username, courseCode, daysRemaining, hasStarted, hasPaid, wasRefunded FROM Registrations WHERE daysRemaining > 0;.
+Mar 19, 2013 10:37:19 AM log.AbstractLogger log
+SEVERE: 
+	Tue Mar 19 10:37:19 GMT 2013 - java.sql.SQLException: Before start of result set
+Mar 19, 2013 10:37:19 AM log.AbstractLogger log
+INFO: 
+	Tue Mar 19 10:37:19 GMT 2013 - Admin001 tried to refund a registered user jmurray for course VT2097, but the process failed.
+Mar 19, 2013 10:38:16 AM log.AbstractLogger log
+INFO: 
+	Tue Mar 19 10:38:16 GMT 2013 - Admin001 connected.
+Mar 19, 2013 10:38:18 AM log.AbstractLogger log
+INFO: 
+	Tue Mar 19 10:38:18 GMT 2013 - Admin001 sent SQL query SELECT username, courseCode, daysRemaining, hasStarted, hasPaid, wasRefunded FROM Registrations WHERE daysRemaining > 0;.
+Mar 19, 2013 10:41:03 AM log.AbstractLogger log
+INFO: 
+	Tue Mar 19 10:41:03 GMT 2013 - Admin001 connected.
+Mar 19, 2013 10:41:04 AM log.AbstractLogger log
+INFO: 
+	Tue Mar 19 10:41:04 GMT 2013 - Admin001 sent SQL query SELECT username, courseCode, daysRemaining, hasStarted, hasPaid, wasRefunded FROM Registrations WHERE daysRemaining > 0;.
+Mar 19, 2013 10:45:39 AM log.AbstractLogger log
+INFO: 
+	Tue Mar 19 10:45:39 GMT 2013 - Admin001 connected.
+Mar 19, 2013 10:45:41 AM log.AbstractLogger log
+INFO: 
+	Tue Mar 19 10:45:41 GMT 2013 - Admin001 sent SQL query SELECT * FROM UnrepliedUserMessages;.
+Mar 19, 2013 10:53:19 AM log.AbstractLogger log
+INFO: 
+	Tue Mar 19 10:53:19 GMT 2013 - Admin001 connected.
+Mar 19, 2013 10:53:23 AM log.AbstractLogger log
+INFO: 
+	Tue Mar 19 10:53:23 GMT 2013 - Admin001 sent SQL query SELECT * FROM UnrepliedUserMessages;.

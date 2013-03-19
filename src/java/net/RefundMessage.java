@@ -18,6 +18,7 @@ public class RefundMessage extends Message {
      */
     public RefundMessage(int id, String username, String courseCode) {
         super(id);
-        content.put(username, id);
+        content.put(USERNAME, username);
+        content.put(CODE, courseCode);
     }
 }

@@ -547,3 +547,53 @@ INFO:
 Mar 13, 2013 12:19:28 PM log.AbstractLogger log
 SEVERE: 
 	Wed Mar 13 12:19:28 GMT 2013 - java.net.SocketException: Connection reset
+Mar 19, 2013 10:28:44 AM log.AbstractLogger log
+SEVERE: 
+	Tue Mar 19 10:28:44 GMT 2013 - com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server. SQL connection was unable to be established
+Mar 19, 2013 10:28:44 AM log.AbstractLogger log
+SEVERE: 
+	Tue Mar 19 10:28:44 GMT 2013 - java.lang.NullPointerException Query [SELECT * FROM Users WHERE isAdmin = TRUE AND username = 'Admin001' AND password = '4194d1706ed1f408d5e02d672777019f4d5385c766a8c6ca8acba3167d36a7b9';] has failed.
+Mar 19, 2013 10:28:44 AM log.AbstractLogger log
+SEVERE: 
+	Tue Mar 19 10:28:44 GMT 2013 - java.lang.NullPointerException
+Mar 19, 2013 10:29:20 AM log.AbstractLogger log
+INFO: 
+	Tue Mar 19 10:29:20 GMT 2013 - Admin001 connected.
+Mar 19, 2013 10:29:27 AM log.AbstractLogger log
+INFO: 
+	Tue Mar 19 10:29:27 GMT 2013 - Admin001 sent SQL query SELECT username, courseCode, daysRemaining, hasStarted, hasPaid, wasRefunded FROM Registrations WHERE daysRemaining > 0;.
+Mar 19, 2013 10:29:42 AM log.AbstractLogger log
+SEVERE: 
+	Tue Mar 19 10:29:42 GMT 2013 - java.sql.SQLException: Illegal operation on empty result set.
+Mar 19, 2013 10:33:20 AM log.AbstractLogger log
+SEVERE: 
+	Tue Mar 19 10:33:20 GMT 2013 - java.sql.SQLException: Illegal operation on empty result set.
+Mar 19, 2013 10:34:15 AM log.AbstractLogger log
+SEVERE: 
+	Tue Mar 19 10:34:15 GMT 2013 - java.net.BindException: Address already in use: JVM_Bind
+Mar 19, 2013 10:33:20 AM log.AbstractLogger log
+INFO: 
+	Tue Mar 19 10:33:20 GMT 2013 - Admin001 tried to refund a registered user null for course null, but the process failed.
+Mar 19, 2013 10:34:24 AM log.AbstractLogger log
+SEVERE: 
+	Tue Mar 19 10:34:24 GMT 2013 - java.net.SocketException: Connection reset
+Mar 19, 2013 10:35:03 AM log.AbstractLogger log
+SEVERE: 
+	Tue Mar 19 10:35:03 GMT 2013 - java.lang.NullPointerException
+Mar 19, 2013 10:37:19 AM log.AbstractLogger log
+SEVERE: 
+	Tue Mar 19 10:37:19 GMT 2013 - java.sql.SQLException: Before start of result set
+Mar 19, 2013 10:37:19 AM log.AbstractLogger log
+INFO: 
+	Tue Mar 19 10:37:19 GMT 2013 - Admin001 tried to refund a registered user jmurray for course VT2097, but the process failed.
+Mar 19, 2013 10:37:47 AM log.AbstractLogger log
+SEVERE: 
+	Tue Mar 19 10:37:47 GMT 2013 - java.net.SocketException: Connection reset
+Mar 19, 2013 10:46:22 AM log.AbstractLogger log
+SEVERE: 
+	Tue Mar 19 10:46:22 GMT 2013 - java.net.SocketException: Connection reset
+Mar 19, 2013 10:53:31 AM log.AbstractLogger log
+SEVERE: 
+	Tue Mar 19 10:53:31 GMT 2013 - java.net.SocketException: Connection reset

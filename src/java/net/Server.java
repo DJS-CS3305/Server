@@ -195,16 +195,20 @@ public class Server extends Thread {
         }
         else if(msg instanceof RefundMessage) {
             RefundMessage refundMsg = (RefundMessage) msg;
-            String refundUser = (String) refundMsg.getContent().get(RefundMessage.USERNAME);
-            String courseCode = (String) refundMsg.getContent().get(RefundMessage.CODE);
+            String refundUser = refundMsg.getContent().get(RefundMessage.USERNAME).toString();
+            String courseCode = refundMsg.getContent().get(RefundMessage.CODE).toString();
             
             ResultSet rs = Query.query("SELECT paypalUsername FROM Registrations " + 
                     "WHERE username = '" + refundUser + "' AND courseCode = '" +
                     courseCode + "';");
             
             try {
+                rs.next();
                 String transactionId = rs.getString(1);
                 Refunds.refund(transactionId);
+                
+                AckMessage ack = new AckMessage(refundMsg.getId(), true);
+                ack.send(sockets.get(username).getOut());
             }
             catch(Exception e) {
                 ErrorLogger.get().log(e.toString());
@@ -213,6 +217,9 @@ public class Server extends Thread {
                 AccessLogger.get().log(username + " tried to refund a registered "
                         + "user " + refundUser + " for course " + courseCode + 
                         ", but the process failed.");
+                
+                AckMessage nack = new AckMessage(refundMsg.getId(), false);
+                nack.send(sockets.get(username).getOut());
             }
         }
     }
