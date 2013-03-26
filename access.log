@@ -791,3 +791,69 @@ INFO:
 26-Mar-2013 11:45:44 log.AbstractLogger log
 INFO: 
 	Tue Mar 26 11:45:44 GMT 2013 - Admin001 set the maintenance time to 1364413500000ms.
+26-Mar-2013 12:49:06 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 12:49:06 GMT 2013 - Server started.
+26-Mar-2013 12:49:26 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 12:49:26 GMT 2013 - Admin001 connected.
+26-Mar-2013 12:49:29 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 12:49:29 GMT 2013 - Admin001 sent SQL query SELECT * FROM Users;.
+26-Mar-2013 12:51:02 log.AbstractLogger log
+SEVERE: 
+	Tue Mar 26 12:51:02 GMT 2013 - java.net.SocketException: Connection reset
+26-Mar-2013 12:51:19 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 12:51:19 GMT 2013 - Admin001 connected.
+26-Mar-2013 12:51:21 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 12:51:21 GMT 2013 - Admin001 sent SQL query SELECT * FROM Users;.
+26-Mar-2013 12:51:24 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 12:51:24 GMT 2013 - Admin001 sent SQL query UPDATE Users SET isAdmin = TRUE WHERE username = 'bobkatt362';.
+26-Mar-2013 12:51:28 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 12:51:28 GMT 2013 - Admin001 sent SQL query SELECT * FROM Users;.
+26-Mar-2013 12:51:35 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 12:51:35 GMT 2013 - Admin001 sent SQL query UPDATE Users SET isAdmin = FALSE WHERE username = 'bobkatt362';.
+26-Mar-2013 12:51:38 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 12:51:38 GMT 2013 - Admin001 sent SQL query SELECT * FROM Users;.
+26-Mar-2013 12:51:42 log.AbstractLogger log
+SEVERE: 
+	Tue Mar 26 12:51:42 GMT 2013 - java.net.SocketException: Connection reset
+26-Mar-2013 12:53:43 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 12:53:43 GMT 2013 - Admin001 connected.
+26-Mar-2013 12:53:45 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 12:53:45 GMT 2013 - Admin001 sent SQL query SELECT * FROM Users;.
+26-Mar-2013 12:53:50 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 12:53:50 GMT 2013 - Admin001 sent SQL query UPDATE Users SET isAdmin = TRUE WHERE username = 'bobkatt362';.
+26-Mar-2013 12:53:53 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 12:53:53 GMT 2013 - Admin001 sent SQL query UPDATE Users SET isAdmin = TRUE WHERE username = 'bobkatt362';.
+26-Mar-2013 12:53:55 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 12:53:55 GMT 2013 - Admin001 sent SQL query SELECT * FROM Users;.
+26-Mar-2013 12:54:00 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 12:54:00 GMT 2013 - Admin001 sent SQL query UPDATE Users SET isAdmin = FALSE WHERE username = 'bobkatt362';.
+26-Mar-2013 13:23:48 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 13:23:48 GMT 2013 - Server started.
+26-Mar-2013 13:24:07 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 13:24:07 GMT 2013 - Admin001 connected.
+26-Mar-2013 13:24:10 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 13:24:10 GMT 2013 - Admin001 sent SQL query SELECT * FROM Courses;.
+26-Mar-2013 13:27:56 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 13:27:56 GMT 2013 - Admin001 sent SQL query SELECT * FROM Lecturers;.
+26-Mar-2013 13:30:56 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 13:30:56 GMT 2013 - Admin001 sent SQL query SELECT * FROM Courses;.

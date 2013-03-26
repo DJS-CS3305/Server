@@ -7,8 +7,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="web.CoursePage" %>
 <%@page import="java.util.Date" %>
+<%@page import="java.net.URLDecoder" %>
 <%-- The course code should be supplied by GET --%>
-<% String courseCode = request.getParameter("course"); %>
+<% String courseCode = URLDecoder.decode(request.getParameter("course"), "UTF-8"); %>
 <% CoursePage pageContent = new CoursePage(courseCode); %>
 
 <!DOCTYPE html>
