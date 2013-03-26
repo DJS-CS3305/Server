@@ -611,3 +611,129 @@ INFO:
 Mar 19, 2013 12:39:16 PM log.AbstractLogger log
 INFO: 
 	Tue Mar 19 12:39:16 GMT 2013 - Admin001 connected.
+26-Mar-2013 09:21:04 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 09:21:04 GMT 2013 - Server started.
+26-Mar-2013 09:25:56 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 09:25:56 GMT 2013 - Server started.
+26-Mar-2013 09:46:49 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 09:46:49 GMT 2013 - Server started.
+26-Mar-2013 09:49:35 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 09:49:35 GMT 2013 - Server started.
+26-Mar-2013 09:49:53 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 09:49:53 GMT 2013 - Admin001 connected.
+26-Mar-2013 09:50:02 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 09:50:02 GMT 2013 - Admin001 sent SQL query SELECT * FROM Users;.
+26-Mar-2013 10:04:28 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 10:04:28 GMT 2013 - Server started.
+26-Mar-2013 10:04:54 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 10:04:54 GMT 2013 - Admin001 connected.
+26-Mar-2013 10:05:27 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 10:05:27 GMT 2013 - Admin001 sent SQL query SELECT * FROM Courses;.
+26-Mar-2013 10:05:30 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 10:05:30 GMT 2013 - Admin001 sent SQL query SELECT * FROM Users;.
+26-Mar-2013 10:05:32 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 10:05:32 GMT 2013 - Admin001 sent SQL query SELECT * FROM Lecturers;.
+26-Mar-2013 10:05:33 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 10:05:33 GMT 2013 - Admin001 sent SQL query SELECT username, courseCode, daysRemaining, hasStarted, hasPaid, wasRefunded FROM Registrations WHERE daysRemaining > 0;.
+26-Mar-2013 10:05:36 log.AbstractLogger log
+SEVERE: 
+	Tue Mar 26 10:05:36 GMT 2013 - java.net.SocketException: Connection reset
+26-Mar-2013 10:09:44 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 10:09:44 GMT 2013 - Admin001 connected.
+26-Mar-2013 10:09:48 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 10:09:48 GMT 2013 - Admin001 sent SQL query SELECT * FROM Users;.
+26-Mar-2013 10:10:14 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 10:10:14 GMT 2013 - Admin001 sent SQL query SELECT * FROM Courses;.
+26-Mar-2013 10:10:45 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 10:10:45 GMT 2013 - Admin001 sent SQL query SELECT * FROM Lecturers;.
+26-Mar-2013 10:11:30 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 10:11:30 GMT 2013 - Admin001 sent SQL query SELECT * FROM Lecturers WHERE name = 'Frank West';.
+26-Mar-2013 10:11:30 log.AbstractLogger log
+SEVERE: 
+	Tue Mar 26 10:11:30 GMT 2013 - com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 've covered wars 'know. FAAAANTASTIC!' WHERE name = 'Frank West'' at line 1 Query [UPDATE Lecturers SET description = 'I've covered wars 'know. FAAAANTASTIC!' WHERE name = 'Frank West';] has failed.
+26-Mar-2013 10:11:30 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 10:11:30 GMT 2013 - Admin001 sent SQL query UPDATE Lecturers SET description = 'I've covered wars 'know. FAAAANTASTIC!' WHERE name = 'Frank West';.
+26-Mar-2013 10:11:33 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 10:11:33 GMT 2013 - Admin001 sent SQL query SELECT * FROM Lecturers;.
+26-Mar-2013 10:11:36 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 10:11:36 GMT 2013 - Admin001 sent SQL query SELECT username, courseCode, daysRemaining, hasStarted, hasPaid, wasRefunded FROM Registrations WHERE daysRemaining > 0;.
+26-Mar-2013 10:11:37 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 10:11:37 GMT 2013 - Admin001 sent SQL query SELECT * FROM Lecturers;.
+26-Mar-2013 10:12:24 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 10:12:24 GMT 2013 - Admin001 sent SQL query SELECT * FROM Courses;.
+26-Mar-2013 10:12:40 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 10:12:40 GMT 2013 - Admin001 sent SQL query SELECT * FROM Courses;.
+26-Mar-2013 10:12:42 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 10:12:42 GMT 2013 - Admin001 sent SQL query SELECT username, courseCode, daysRemaining, hasStarted, hasPaid, wasRefunded FROM Registrations WHERE daysRemaining > 0;.
+26-Mar-2013 10:26:42 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 10:26:42 GMT 2013 - Server started.
+26-Mar-2013 10:27:01 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 10:27:01 GMT 2013 - Admin001 connected.
+26-Mar-2013 10:27:04 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 10:27:04 GMT 2013 - Admin001 sent SQL query SELECT * FROM Courses;.
+26-Mar-2013 10:27:08 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 10:27:08 GMT 2013 - Admin001 sent SQL query SELECT * FROM Lecturers;.
+26-Mar-2013 10:27:21 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 10:27:21 GMT 2013 - Admin001 sent SQL query SELECT * FROM Lecturers WHERE name = 'Frank West';.
+26-Mar-2013 10:27:21 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 10:27:21 GMT 2013 - Admin001 sent SQL query UPDATE Lecturers SET description = 'I\'ve covered wars y\'know.' WHERE name = 'Frank West';.
+26-Mar-2013 10:27:36 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 10:27:36 GMT 2013 - Admin001 sent SQL query SELECT * FROM Lecturers;.
+26-Mar-2013 10:28:54 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 10:28:54 GMT 2013 - Admin001 sent SQL query SELECT * FROM Users;.
+26-Mar-2013 10:29:04 log.AbstractLogger log
+SEVERE: 
+	Tue Mar 26 10:29:04 GMT 2013 - java.net.SocketException: Connection reset
+26-Mar-2013 10:40:41 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 10:40:41 GMT 2013 - Admin001 connected.
+26-Mar-2013 10:40:44 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 10:40:44 GMT 2013 - Admin001 sent SQL query SELECT * FROM Users;.
+26-Mar-2013 10:41:02 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 10:41:02 GMT 2013 - Admin001 sent SQL query SELECT username, courseCode, daysRemaining, hasStarted, hasPaid, wasRefunded FROM Registrations WHERE daysRemaining > 0;.
+26-Mar-2013 10:41:09 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 10:41:09 GMT 2013 - Admin001 sent SQL query SELECT * FROM Courses;.
+26-Mar-2013 10:41:25 log.AbstractLogger log
+SEVERE: 
+	Tue Mar 26 10:41:25 GMT 2013 - java.net.SocketException: Connection reset
+26-Mar-2013 10:44:03 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 10:44:03 GMT 2013 - Admin001 connected.
+26-Mar-2013 10:44:06 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 10:44:06 GMT 2013 - Admin001 sent SQL query SELECT * FROM Courses;.

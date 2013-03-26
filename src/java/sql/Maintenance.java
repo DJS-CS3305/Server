@@ -133,4 +133,11 @@ public class Maintenance {
     public static boolean isMaintenanceTime() throws IOException {
         return NEXT_MAINTENANCE.before(new Date());
     }
+    
+    /**
+     * @return Next maintenance time in milliseconds.
+     */
+    public static long getTime() {
+        return NEXT_MAINTENANCE.getTime();
+    }
 }

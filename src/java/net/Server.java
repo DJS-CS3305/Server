@@ -11,6 +11,7 @@ import log.ErrorLogger;
 import mail.Mailer;
 import payments.Refunds;
 import sql.Query;
+import sql.Maintenance;
 
 /**
  * Contains the methods for handling requests from connected administrator
@@ -218,6 +219,36 @@ public class Server extends Thread {
                 
                 AckMessage nack = new AckMessage(refundMsg.getId(), false);
                 nack.send(sockets.get(username).getOut());
+            }
+        }
+        else if(msg instanceof MaintenanceMessage) {
+            MaintenanceMessage maintMsg = (MaintenanceMessage) msg;
+            
+            boolean type = (Boolean) maintMsg.getContent().get(MaintenanceMessage.TYPE);
+            
+            if(type == MaintenanceMessage.ASK_TYPE) {
+                long millis = Maintenance.getTime();
+                MaintenanceMessage reply = new MaintenanceMessage(maintMsg.getId(),
+                        millis);
+                reply.send(sockets.get(username).getOut());
+                
+                AccessLogger.get().log(username + " asked for the maintenance time.");
+            }
+            else {
+                //tell type: set the time
+                long millis = (Long) maintMsg.getContent().get(MaintenanceMessage.TIME);
+                
+                try {
+                    Maintenance.adjustTime(millis);
+                    AccessLogger.get().log(username + " set the " + 
+                            "maintenance time to " + millis + "ms.");
+                }
+                catch(Exception e) {
+                    ErrorLogger.get().log(e.toString());
+                    e.printStackTrace();
+                    AccessLogger.get().log(username + " failed setting the " + 
+                            "maintenance time.");
+                }
             }
         }
     }
