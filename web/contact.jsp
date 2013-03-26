@@ -5,6 +5,12 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+String success=request.getParameter("success");
+if(success==null || success=="null"){
+ success="";
+}
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,15 +31,41 @@
                     <li><a href="faqs.jsp">Help & FAQs</a></li>
                     <li><a href="contact.jsp">Contact</a></li>
                     <li><a href="about.jsp">About</a></li>
+                    
+                     <% 
+                    if(null != session.getAttribute("username")){
+                    %>
+                
+                    <p id="hiUser">(Hi <a href="index.jsp">
+                       <%out.print(session.getAttribute("username"));%>
+                        </a>
+                        <a href="doLogout.jsp"><u>sign out</u></a>)
+                    </p>
+                    <%
+                    }
+                    %>
+                    
                 </ul> 
             </div>
+            
+            <% 
+            if(null != session.getAttribute("username")){
+            %>
             <div id="contactBox">
                 <form action="contactAction.jsp" method="POST">
                     <p><label>Send a message to our System Admins</label></p>
                     <p><textarea id="feedback" name="feedback"></textarea></p>
                     <input type="submit" name="send" value="Send">
                 </form>
+                <div id="successMessage"><p><%=success%></p></div>
             </div>
+            <%
+                }
+                else{ %>
+                <div id="contactCover"><img src="resources/quad.jpg" alt="quad"></div> 
+            <%
+                    } 
+            %>
             <div id="contactInfo">
                 <ul>
                     <li id="email">

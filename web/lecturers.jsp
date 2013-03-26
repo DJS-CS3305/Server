@@ -18,7 +18,7 @@
         <link rel="stylesheet" type="text/css" href="style.css">
         <%= pageContent.getTitle() %>
     </head>
-    <body>
+    <body><div id="container">
         <div id="header">
             <img src="resources/logo.jpg" alt="UCC Crest" height="100" width="100">
             <h1>UCC Summer Courses</h1>
@@ -46,5 +46,5 @@
             </ul>
         </div>
         <%= pageContent.getBody() %>
-    </body>
+    </div></body>
 </html>

@@ -21,7 +21,14 @@ body {
     width: 750px;
     min-height: 800px;
     margin: auto;
+}
 
+#container p, #container form {
+    margin-left: 10px;
+}
+
+#container h1, #container h2 {
+    margin-left: 5px;
 }
 
 #header {
@@ -165,3 +172,15 @@ body {
     margin: 4px;
 }
 /* --------------- */
+
+/* Courses and lecturers */
+
+#description {
+    margin: 20px;
+}
+
+#description img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

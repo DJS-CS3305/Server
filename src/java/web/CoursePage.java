@@ -32,15 +32,16 @@ public class CoursePage {
             "<title>" + CODE_REPLACE + " Course Details</title>";
     private static final String BODY_TEMPLATE = "<div id=\"coursePage\">" +
             "<h2>" + CODE_REPLACE + " - " + NAME_REPLACE + "</h2>" + 
-            "<p>Runs from: " + DATES_REPLACE + "</p>" +
-            "<p>Start time: " + START_TIME_REPLACE + "</p>" +
-            "<p>Class duration: " + CLASS_TIME_REPLACE + "</p>" +
-            "<p>Lecturer: <a href=\"lecturers.jsp?name=" + LECTURER_LINK_REPLACE + 
+            "<p><b>Runs from: </b>" + DATES_REPLACE + "</p>" +
+            "<p><b>Start time: </b>" + START_TIME_REPLACE + "</p>" +
+            "<p><b>Class duration: </b>" + CLASS_TIME_REPLACE + "</p>" +
+            "<p><b>Lecturer: </b><a href=\"lecturers.jsp?name=" + LECTURER_LINK_REPLACE + 
                 "\">" + LECTURER_REPLACE + "</a></p>" +
-            "<p>Location: " + LOCATION_REPLACE + "</p>" +
-            "<p>Cost: €" + FEE_REPLACE + "</p>" + 
-            "<p>Capactiy: " + CAPACITY_REPLACE + "</p>" +
-            "<div id=\"description\"><p>Course Description: </p>" + DESCRIPTION_REPLACE + "</div>" + 
+            "<p><b>Location: </b>" + LOCATION_REPLACE + "</p>" +
+            "<p><b>Cost: </b>€" + FEE_REPLACE + "</p>" + 
+            "<p><b>Capacity: </b>" + CAPACITY_REPLACE + "</p>" +
+            "<p><b>Course Description: </b></p><div id=\"description\">" + 
+                DESCRIPTION_REPLACE + "</div>" + 
             "</div>";
     private static SimpleDateFormat DATE_FORMAT =  new SimpleDateFormat("dd/MM/yyyy");
     private static SimpleDateFormat TIME_FORMAT =  new SimpleDateFormat("HH:mm");

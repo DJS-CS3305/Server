@@ -19,7 +19,7 @@
         <link rel="stylesheet" type="text/css" href="style.css">
         <%= pageContent.getTitle() %>
     </head>
-    <body>
+    <body><div id="container">
         <div id="header">
             <img src="resources/logo.jpg" alt="UCC Crest" height="100" width="100">
             <h1>UCC Summer Courses</h1>
@@ -50,9 +50,9 @@
         <%
             if(pageContent.getStartDate().after(new Date())) {
                 //print registering information
-                out.print("<p>Stuff for registering goes here</p>");
+                //out.print("<p>Stuff for registering goes here</p>");
             }
         %>
-    </body>
+    </div></body>
 </html>
 <% pageContent.addHit(); %>

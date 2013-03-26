@@ -104,14 +104,14 @@
                 <ul>
                     <li><a href="index.jsp">Home</a></li>
                     <li><a href="courseList.jsp">Courses</a></li>
-                    <li><a href="faqs.html">Help & FAQs</a></li>
+                    <li><a href="faqs.jsp">Help & FAQs</a></li>
                     <li><a href="contact.jsp">Contact</a></li>
-                    <li><a href="about.html">About</a></li>
+                    <li><a href="about.jsp">About</a></li>
                 </ul>
             </div>
             <div id="register">
                     <form name="frmRegister" onSubmit="return validate();" action="doRegister.jsp" method="POST">
-                        <p><label for="name">Username: &nbsp;</label><input type="text" name="userName"/>
+                        <label for="name">Username: &nbsp;</label><input type="text" name="userName"/>
                        
                         <label for="password">Password: &nbsp;</label><input type="password" name="Pwd"/>
                        
@@ -127,9 +127,8 @@
                         </SELECT>
                         </br>
                         <label for="sex">Sex: &nbsp;</label>
-                       
-                        <p>Male<input type="radio" name="sex" value="m">
-                        Female<input type="radio" name="sex" value="f"></p>
+                        <p>Male: <input type="radio" name="sex" value="m">
+                        Female: <input type="radio" name="sex" value="f"></p>
                         
                         <label for="stAddr">Address: &nbsp;</label>
                             <input type="text" name="stAddr"/>
@@ -141,7 +140,7 @@
                         
                         <label for="telNo">Telephone Number: &nbsp;</lable><input type="text" name="telNo"/>
                         
-                        <input type="submit" name="sSubmit" value="Submit"/></p>                  
+                        <input type="submit" name="sSubmit" value="Submit"/>              
                     </form>  
             </div>   
         </div>
