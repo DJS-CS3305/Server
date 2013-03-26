@@ -27,8 +27,8 @@ public class CoursePage {
     private static final String CAPACITY_REPLACE = "#[[cap]]#";
     private static final String TITLE_TEMPLATE = 
             "<title>" + CODE_REPLACE + " Course Details</title>";
-    private static final String BODY_TEMPLATE = 
-            "<h1>" + CODE_REPLACE + " - " + NAME_REPLACE + "</h1>" + 
+    private static final String BODY_TEMPLATE = "<div id=\"coursePage\">" +
+            "<h2>" + CODE_REPLACE + " - " + NAME_REPLACE + "</h2>" + 
             "<p>Runs from: " + DATES_REPLACE + "</p>" +
             "<p>Start time: " + START_TIME_REPLACE + "</p>" +
             "<p>Class duration: " + CLASS_TIME_REPLACE + "</p>" +
@@ -36,7 +36,8 @@ public class CoursePage {
             "<p>Location: " + LOCATION_REPLACE + "</p>" +
             "<p>Cost: €" + FEE_REPLACE + "</p>" + 
             "<p>Capactiy: " + CAPACITY_REPLACE + "</p>" +
-            "<div><p>Course Description: </p>" + DESCRIPTION_REPLACE + "</div>";
+            "<div id=\"description\"><p>Course Description: </p>" + DESCRIPTION_REPLACE + "</div>" + 
+            "</div>";
     private static SimpleDateFormat DATE_FORMAT =  new SimpleDateFormat("dd/MM/yyyy");
     private static SimpleDateFormat TIME_FORMAT =  new SimpleDateFormat("HH:mm");
     

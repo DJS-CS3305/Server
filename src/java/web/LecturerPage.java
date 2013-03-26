@@ -16,8 +16,8 @@ public class LecturerPage {
     private static final String TITLE_TEMPLATE = 
             "<title>Lecturer Details: " + NAME_REPLACE + "</title>";
     private static final String BODY_TEMPLATE = 
-            "<h1>" + NAME_REPLACE + "</h1>" + 
-            "<div>" + DESCRIPTION_REPLACE + "</div>";
+            "<div id=\"lecturerPage\"><h2>" + NAME_REPLACE + "</h2>" + 
+            "<div id=\"description\">" + DESCRIPTION_REPLACE + "</div></div>";
     
     private String title;
     private String body;
