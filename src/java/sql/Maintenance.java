@@ -20,7 +20,8 @@ public class Maintenance {
     public static final String TIME_FILENAME = "maintenance.time";
     public static final String DUMP_FILEPATH = "./sqlDumps/";
     
-    private static Date NEXT_MAINTENANCE = new Date();
+    private static Date NEXT_MAINTENANCE = new Date(new Date().getTime() + 
+            86400000);
     
     /**
      * Maintains the database by removing unneeded rows, decrementing days

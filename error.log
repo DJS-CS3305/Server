@@ -707,3 +707,21 @@ INFO:
 26-Mar-2013 10:44:42 log.AbstractLogger log
 SEVERE: 
 	Tue Mar 26 10:44:42 GMT 2013 - java.net.SocketException: Connection reset
+26-Mar-2013 11:33:50 log.AbstractLogger log
+SEVERE: 
+	Tue Mar 26 11:33:50 GMT 2013 - java.net.SocketException: Connection reset
+26-Mar-2013 11:34:27 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 11:34:27 GMT 2013 - Admin001 connected.
+26-Mar-2013 11:34:29 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 11:34:29 GMT 2013 - Admin001 asked for the maintenance time.
+26-Mar-2013 11:35:05 log.AbstractLogger log
+INFO: 
+	Tue Mar 26 11:35:05 GMT 2013 - Admin001 set the maintenance time to 1364383980000ms.
+26-Mar-2013 11:35:17 log.AbstractLogger log
+SEVERE: 
+	Tue Mar 26 11:35:17 GMT 2013 - java.net.SocketException: Connection reset
+26-Mar-2013 11:45:59 log.AbstractLogger log
+SEVERE: 
+	Tue Mar 26 11:45:59 GMT 2013 - java.net.SocketException: Connection reset
