@@ -1,0 +1,167 @@
+/* 
+    Document   : style
+    Created on : 05-Mar-2013, 00:38:33
+    Author     : David
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+body {
+    background-image: url("resources/dark.jpg");
+}
+
+#container {
+    background-color: white;
+    border: 1px solid;
+    border-radius: 15px;
+    width: 750px;
+    min-height: 800px;
+    margin: auto;
+
+}
+
+#header {
+    border-bottom: 1px solid grey;
+    margin: 10px;
+    text-align: center;
+}
+
+/* Menu Bar */
+#menu ul {
+    list-style-type:none;
+    margin: auto;
+    width: 375px;
+}
+
+#menu li {
+    display:inline;
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: whitesmoke;
+}
+
+#menu a {
+    text-decoration: none;
+}
+
+#menu li:hover {background-color: lightgrey;}
+/* --------------- */
+
+/* Profile */
+
+#coursesBox {
+    margin-left: auto;
+    margin-right: 25px;
+    height:250px;
+    width:250px;
+    border:1px solid #ccc;
+    overflow:auto;
+    float: left;
+}
+
+#coursesBox h3 {
+    text-align: center;
+    border-bottom: 1px solid gray;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#userInfo {
+    float: left;
+    width: 400px;
+    margin-right: 50px;
+}
+/* --------------- */
+
+/* Fourm for Login */
+#login form {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  width: 515px;
+}
+
+#login input {
+    margin: 2px;
+    background-color: lightgray;
+}
+    
+#loginPicture {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    padding-bottom: 0px;
+}
+
+#login p {
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: whitesmoke;
+}
+/* --------------- */
+
+#register input {
+    display: block;
+    
+}
+/* Contact Info */
+#contactInfo {
+    text-align: left;
+}
+
+#contactInfo li {
+    list-style-type: none;
+    margin: auto;
+    width: 375px;
+    padding: 5px;
+}
+/* --------------- */
+
+/* Contact Box */
+#contactBox form {
+    margin-left: 10px;
+    text-align: center;
+}
+
+#contactBox input {
+    width: 400px;
+    
+}
+
+#contactBox textarea {
+    margin: 2px;
+    width: 550px;
+    height: 250px;
+    border: 3px solid #cccccc;
+    padding: 5px;
+    resize: none;
+    background-color: #ffff99;
+}
+/* --------------- */
+
+/* About */
+#about {
+    border: 2px solid grey;
+    border-radius: 15px;
+    width: 500px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#about p {
+    padding: 10px;
+}
+
+#about img {
+    float: left;
+    margin: 4px;
+}
+/* --------------- */
