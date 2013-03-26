@@ -17,10 +17,10 @@ and open the template in the editor.
             <div id="menu">
                 <ul>
                     <li><a href="index.jsp">Home</a></li>
-                    <li><a href="courses.jsp">Courses</a></li>
-                    <li><a href="faqs.html">Help & FAQs</a></li>
+                    <li><a href="courseList.jsp">Courses</a></li>
+                    <li><a href="faqs.jsp">Help & FAQs</a></li>
                     <li><a href="contact.jsp">Contact</a></li>
-                    <li><a href="about.html">About</a></li>
+                    <li><a href="about.jsp">About</a></li>
                 </ul> 
             </div>
             <div id="about">

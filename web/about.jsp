@@ -19,15 +19,15 @@ and open the template in the editor.
                 <ul>
                     <li><a href="index.jsp">Home</a></li>
                     <li><a href="courses.jsp">Courses</a></li>
-                    <li><a href="faqs.html">Help & FAQs</a></li>
+                    <li><a href="faqs.jsp">Help & FAQs</a></li>
                     <li><a href="contact.jsp">Contact</a></li>
-                    <li><a href="about.htnl">About</a></li>
+                    <li><a href="about.jsp">About</a></li>
                 </ul> 
             </div>
             <div id="about">
                 <img src="resources/questionMark.png" alt="question mark">
                 <p>
-                The university was founded in 1845 as one of three Queen’s Colleges 
+                The university was founded in 1845 as one of three Queen's Colleges 
                 located in Belfast, Cork, and Galway. It became University College, 
                 Cork, under the Irish Universities Act of 1908. The Universities Act 
                 1997 renamed the university as National University of Ireland, Cork, 
@@ -43,7 +43,7 @@ and open the template in the editor.
                 of every kind offered from the start of June to mid September, you sure
                 to find something for you. So come and join us, and find out for yourself
                 why we're still regarded as the best facilitator of summer courses in
-                Ireland. Check out UCC's website <a href="http://www.ucc.ie" /> now!
+                Ireland. Check out UCC's website <a href="http://www.ucc.ie" /> now!</a>
                 </p>
             </div>
         </div>

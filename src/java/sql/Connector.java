@@ -13,15 +13,15 @@ import log.ErrorLogger;
  * @author Stephen Fahy
  */
 public class Connector {
-    //private static final String ADDRESS = "localhost";
-    private static final String ADDRESS = "cs1.ucc.ie";
+    private static final String ADDRESS = "localhost";
+    //private static final String ADDRESS = "cs1.ucc.ie";
     private static final String PORT = "3306";
-    //private static final String DATABASE = "SCOffice";
-    private static final String DATABASE = "2014_saf3";
-    //private static final String USERNAME = "backend";
-    private static final String USERNAME = "saf3";
-    //private static final String PASSWORD = "xRd43FF65Vc";
-    private static final String PASSWORD = "wiaquahl";
+    private static final String DATABASE = "SCOffice";
+    //private static final String DATABASE = "2014_saf3";
+    private static final String USERNAME = "backend";
+    //private static final String USERNAME = "saf3";
+    private static final String PASSWORD = "xRd43FF65Vc";
+    //private static final String PASSWORD = "wiaquahl";
     private static final String DUMP_COMMAND = "D:\\wamp\\bin\\mysql\\mysql5.5.24" + 
             "\\bin\\mysqldump.exe -h " + ADDRESS + " -u " + USERNAME + " -p" + 
             PASSWORD + " --add-drop-database -B " + DATABASE;

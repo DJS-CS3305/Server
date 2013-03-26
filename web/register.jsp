@@ -111,33 +111,31 @@
             </div>
             <div id="register">
                     <form name="frmRegister" onSubmit="return validate();" action="doRegister.jsp" method="POST">
-                        <p><label for="name">Username: &nbsp;</lable><input type="text" name="userName"/>
+                        <p><label for="name">Username: &nbsp;</label><input type="text" name="userName"/>
                        
-                        <label for="password">Password: &nbsp;</lable><input type="password" name="Pwd"/>
+                        <label for="password">Password: &nbsp;</label><input type="password" name="Pwd"/>
                        
-                        <label for="firstName">First Name: &nbsp;</lable><input type="text" name="fName"/>
+                        <label for="firstName">First Name: &nbsp;</label><input type="text" name="fName"/>
                        
-                        <label for="lastName">Last Name: &nbsp;</lable><input type="text" name="lName"/>
+                        <label for="lastName">Last Name: &nbsp;</label><input type="text" name="lName"/>
                         
-                        <label for="lastName">Age: &nbsp;</lable><SELECT NAME="age" SIZE="1">
+                        <label for="lastName">Age: &nbsp;</label><SELECT NAME="age" SIZE="1">
                         <OPTION SELECTED>
                             <% for(int x=18; x<=100; x++) {%>
                                 <OPTION><%out.print(x);%>
                             <% } %>
                         </SELECT>
                         </br>
-                        <label for="sex">Sex: &nbsp;</lable>
+                        <label for="sex">Sex: &nbsp;</label>
                        
-                        Male<input type="radio" name="sex" value="m">
-                        Female<input type="radio" name="sex" value="f">
+                        <p>Male<input type="radio" name="sex" value="m">
+                        Female<input type="radio" name="sex" value="f"></p>
                         
-                        <label for="stAddr">Street Address: &nbsp;</lable><input type="text" name="stAddr"/>
-                      
-                        <label for="stAddr">Town Address: &nbsp;</lable><input type="text" name="townAddr"/>
-                       
-                        <label for="stAddr">State Address: &nbsp;</lable><input type="text" name="stateAddr"/>
-                       
-                        <label for="stAddr">Country Address: &nbsp;</lable><input type="text" name="countryAddr"/>
+                        <label for="stAddr">Address: &nbsp;</label>
+                            <input type="text" name="stAddr"/>
+                            <input type="text" name="townAddr"/>
+                            <input type="text" name="stateAddr"/>
+                            <input type="text" name="countryAddr"/>
                       
                         <label for="email">Email: &nbsp;</lable><input type="text" name="email"/>
                         

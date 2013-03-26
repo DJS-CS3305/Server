@@ -24,7 +24,7 @@ public class Query {
         try {
             Statement st = Connector.getConnection().createStatement();
             
-            if(query.startsWith("SELECT")) {
+            if(query.toUpperCase().startsWith("SELECT")) {
                 output = st.executeQuery(query);
             }
             else {

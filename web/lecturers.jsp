@@ -19,13 +19,17 @@
         <%= pageContent.getTitle() %>
     </head>
     <body>
+        <div id="header">
+            <img src="resources/logo.jpg" alt="UCC Crest" height="100" width="100">
+            <h1>UCC Summer Courses</h1>
+        </div>
         <div id="menu">
             <ul>
                 <li><a href="index.jsp">Home</a></li>
                 <li><a href="courseList.jsp">Courses</a></li>
-                <li><a href="faqs.html">Help & FAQs</a></li>
+                <li><a href="faqs.jsp">Help & FAQs</a></li>
                 <li><a href="contact.jsp">Contact</a></li>
-                <li><a href="about.html">About</a></li>
+                <li><a href="about.jsp">About</a></li>
 
                 <% 
                 if(null != session.getAttribute("username")){

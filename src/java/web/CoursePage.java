@@ -1,5 +1,6 @@
 package web;
 
+import java.net.URLEncoder;
 import java.sql.ResultSet;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
@@ -25,6 +26,8 @@ public class CoursePage {
     private static final String FEE_REPLACE = "#[[fee]]#";
     private static final String DESCRIPTION_REPLACE = "#[[desc]]#";
     private static final String CAPACITY_REPLACE = "#[[cap]]#";
+    private static final String LECTURER_LINK_REPLACE = "#[[lectLink]]#";
+    
     private static final String TITLE_TEMPLATE = 
             "<title>" + CODE_REPLACE + " Course Details</title>";
     private static final String BODY_TEMPLATE = "<div id=\"coursePage\">" +
@@ -32,7 +35,8 @@ public class CoursePage {
             "<p>Runs from: " + DATES_REPLACE + "</p>" +
             "<p>Start time: " + START_TIME_REPLACE + "</p>" +
             "<p>Class duration: " + CLASS_TIME_REPLACE + "</p>" +
-            "<p>Lecturer: " + LECTURER_REPLACE + "</p>" +
+            "<p>Lecturer: <a href=\"lecturers.jsp?name=" + LECTURER_LINK_REPLACE + 
+                "\">" + LECTURER_REPLACE + "</a></p>" +
             "<p>Location: " + LOCATION_REPLACE + "</p>" +
             "<p>Cost: €" + FEE_REPLACE + "</p>" + 
             "<p>Capactiy: " + CAPACITY_REPLACE + "</p>" +
@@ -87,7 +91,7 @@ public class CoursePage {
             e.printStackTrace();
             
             title = "<title>Database Error</title>";
-            body = "<h1>Database Error</h1>";
+            body = "<h2>Database Error</h2>";
             startDate = new Date(0);
         }
     }
@@ -128,6 +132,14 @@ public class CoursePage {
         String dates = DATE_FORMAT.format(start) + " to " + DATE_FORMAT.format(end);
         String formattedDuration = TIME_FORMAT.format(classDuration);
         String formattedStart = TIME_FORMAT.format(startTime);
+        String lecturerLink = "error";
+        
+        try {
+            lecturerLink = URLEncoder.encode(lecturer, "UTF-8");
+        }
+        catch(Exception e) {
+            
+        }
         
         //cuts off leading zero if one exists
         if(formattedDuration.substring(0, 1).equals("0")) {
@@ -137,6 +149,7 @@ public class CoursePage {
         output = output.replace(CODE_REPLACE, code);
         output = output.replace(NAME_REPLACE, name);
         output = output.replace(LECTURER_REPLACE, lecturer);
+        output = output.replace(LECTURER_LINK_REPLACE, lecturerLink);
         output = output.replace(LOCATION_REPLACE, location);
         output = output.replace(DATES_REPLACE, dates);
         output = output.replace(FEE_REPLACE, feeWithDecimal);

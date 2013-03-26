@@ -4,6 +4,7 @@
     Author     : David
 --%>
 
+<%@page import="sql.Query"%>
 <%@ page contentType="text/html; charset=iso-8859-1" language="java" import="java.sql.*"%>
 <%
 String error=request.getParameter("error");
@@ -54,9 +55,9 @@ if(success==null || success=="null"){
                 <ul>
                     <li><a href="index.jsp">Home</a></li>
                     <li><a href="courseList.jsp">Courses</a></li>
-                    <li><a href="faqs.html">Help & FAQs</a></li>
+                    <li><a href="faqs.jsp">Help & FAQs</a></li>
                     <li><a href="contact.jsp">Contact</a></li>
-                    <li><a href="about.html">About</a></li>
+                    <li><a href="about.jsp">About</a></li>
                     
                     <% 
                     if(null != session.getAttribute("username")){
@@ -76,39 +77,19 @@ if(success==null || success=="null"){
             </div>
                 <%
                     if(null != session.getAttribute("username")){
-                        Connection conn = null;
-                        Class.forName("com.mysql.jdbc.Driver").newInstance();
-                        conn = DriverManager.getConnection("jdbc:derby://localhost:1527/summerCourses","david", "password");
-
                         ResultSet rsdoLogin = null;
-                        PreparedStatement psdoLogin= null;
-                        
                         ResultSet rsdoLogin2 = null;
-                        PreparedStatement psdoLogin2 = null;
-                        
                         ResultSet rsdoLogin3 = null;
-                        PreparedStatement psdoLogin3= null;
-                        
+                        String username = (String)session.getAttribute("username");
 
                         try{
                             String sqlOption="select * from REGISTRATIONS where"
-                                             +" USERNAME=?";
-                            
-                            String sqlOption2="select * from COURSES where"
-                                             +" CODE=?";
-                            
+                                             +" USERNAME='"+username+"'";
                             String sqlOption3="select * from USERS where"
-                                             +" USERNAME=?";
+                                             +" USERNAME='"+username+"'";
                             
-                            psdoLogin=conn.prepareStatement(sqlOption); 
-                            psdoLogin2=conn.prepareStatement(sqlOption2);
-                            psdoLogin3=conn.prepareStatement(sqlOption3);
-                            
-                            String username = (String)session.getAttribute("username");
-                            psdoLogin.setString(1, username);
-                            psdoLogin3.setString(1, username);
-                            
-                            rsdoLogin3=psdoLogin3.executeQuery();
+                            rsdoLogin = Query.query(sqlOption);
+                            rsdoLogin3 = Query.query(sqlOption3);
                             %>
                             <div id="userInfo">
                                 <%
@@ -145,14 +126,14 @@ if(success==null || success=="null"){
                                 <h3>Your Course Info</h3>
                             <p>
                             <%
-                            rsdoLogin=psdoLogin.executeQuery();
                             while(rsdoLogin.next())  {
   
                                 out.println("Code: " +
                                         rsdoLogin.getString("COURSECODE"));
                             String courseCode = rsdoLogin.getString("COURSECODE");
-                            psdoLogin2.setString(1, courseCode);    
-                            rsdoLogin2=psdoLogin2.executeQuery();
+                            String sqlOption2="select * from COURSES where"
+                                             +" CODE='"+courseCode+"'";
+                            rsdoLogin2 = Query.query(sqlOption2);
                                 while(rsdoLogin2.next()) {
                                     
                                     %><ul><li><%

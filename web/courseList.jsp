@@ -5,6 +5,7 @@
 --%>
 
 <%@ page contentType="text/html; charset=iso-8859-1" language="java" import="java.sql.*"%>
+<%@page import="sql.Query" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,9 +23,9 @@
                 <ul>
                     <li><a href="index.jsp">Home</a></li>
                     <li><a href="courseList.jsp">Courses</a></li>
-                    <li><a href="faqs.html">Help & FAQs</a></li>
+                    <li><a href="faqs.jsp">Help & FAQs</a></li>
                     <li><a href="contact.jsp">Contact</a></li>
-                    <li><a href="about.html">About</a></li>
+                    <li><a href="about.jsp">About</a></li>
                     
                     <% 
                     if(null != session.getAttribute("username")){
@@ -42,52 +43,25 @@
             </div>
                 <div id="courseList">
                     <%
-                    Connection conn = null;
-                    Class.forName("com.mysql.jdbc.Driver").newInstance();
-                    conn = DriverManager.getConnection("jdbc:derby://localhost:1527/summerCourses","david", "password");
-
-                    ResultSet rsdoLogin = null;
-                    PreparedStatement psdoLogin= null;
-
                     try{
-
-                        String sqlOption="select * from COURSES";
-
-                        psdoLogin=conn.prepareStatement(sqlOption);
-                        rsdoLogin=psdoLogin.executeQuery();
+                        String sqlOption="SELECT * from Courses;";
+                        ResultSet rsdoLogin = Query.query(sqlOption);
 
                         while(rsdoLogin.next())  {
                           String courseCode=rsdoLogin.getString("CODE");
                           String courseName=rsdoLogin.getString("NAME");
-                          %>
+                     %>
                           <ul>
-                              <li><%=courseCode%> : <a href="course.jsp?courses=<%=courseCode%>"><%=courseName%></a></li>
+                              <li><%=courseCode%> : <a href="courses.jsp?course=<%=courseCode%>"><%=courseName%></a></li>
                           </ul>
-                          <%
+                    <%
                         }
+                        
+                        rsdoLogin.close();
                     }
                     catch(Exception e)
                     {
 
-                        e.printStackTrace();
-                    }
-
-
-                    /// close object and connection
-                    try{
-                         if(psdoLogin!=null){
-                             psdoLogin.close();
-                         }
-                         if(rsdoLogin!=null){
-                             rsdoLogin.close();
-                         }
-
-                         if(conn!=null){
-                          conn.close();
-                         }
-                    }
-                    catch(Exception e)
-                    {
                         e.printStackTrace();
                     }
                     %>
